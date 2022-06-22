@@ -8,7 +8,7 @@ export default function BookCard(book: Book) {
       <div className="mb-6 text-left">
         <Image src={'/assets/'+book.coverImg} alt={book.title} width={180} height={240} objectFit="contain"/>
         <h2 className="text-lg font-normal group-hover:text-blue-600">{book.title}</h2>
-        <p className="text-sm">by { book.author }</p>
+        <p className="text-sm">{(book.editor) ? "edited " : ""}by { book.author || book.editor || "unknown" }</p>
       </div>
     </a></Link>
     )

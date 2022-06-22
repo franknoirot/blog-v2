@@ -66,9 +66,9 @@ const BookTemplate: NextPageWithLayout = (props) => {
         setValue({ 
           bgColor: {
             start: c[0].hex,
-            end: (c[3]) ? c[3].hex : c[2].hex,
+            end: c[2].hex,
           },
-          squareColor: (c[3]) ? c[2].hex : c[1].hex,
+          squareColor: c[1].hex,
         })
       }
     }
@@ -95,13 +95,25 @@ const BookTemplate: NextPageWithLayout = (props) => {
             </div>
           </div>
           <div className="col-span-3">
-            <h1 className="mb-1 text-4xl">{book.title}</h1>
-            <p>by {book.author}</p>
+            <h1 className="mb-1 text-4xl">
+              {book.title}
+              {book.subtitle && (
+                <span className="block text-2xl text-stone-600">{book.subtitle}</span>
+              )}
+            </h1>
+            <div className="grid grid-cols-3 my-6 text-sm gap-x-2 gap-y-3 book-meta text-slate-600">
+            <p>{(book.editor) ? "edited " : ''}by {book.author || book.editor || "unknown" }</p>
             { (book.publishDate || book.firstPublished) &&
-              <time dateTime={(book.publishDate || book.firstPublished)?.toString() || ""} className="text-sm text-slate-600">
+              <time dateTime={(book.publishDate || book.firstPublished)?.toString() || ""}>
                 {book.publishDate || book.firstPublished}
               </time>
             }
+            { (book.category) && <p>{ book.category }</p> }
+            { (book.publisher) && <p>published by { book.publisher }</p> }
+            { (book.publishLocation) && <p>published in { book.publishLocation }</p> }
+            { (book.pages) && <p>{ book.pages } pages</p> }
+            <p>{ book.isBorrowed ? "ⓧ Currently checked out" : "✔ Available to borrow" }</p>
+            </div>
           </div>
         </section>
         <div className="max-w-4xl mx-auto cl-book-body">

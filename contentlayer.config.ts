@@ -70,7 +70,7 @@ export const Book = defineDocumentType(() => ({
         author: {
             type: 'string',
             description: 'Author of the book. For now also list any other authors here',
-            required: true,
+            required: false,
         },
         editor: {
             type: 'string',
