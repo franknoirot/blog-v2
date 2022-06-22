@@ -96,7 +96,7 @@ h3 {
 
 .cl-book-body blockquote,
 .cl-post-body blockquote {
-  @apply border-l bg-sky-50 py-2 px-4 pl-4 border-sky-300;
+  @apply border-l bg-sky-50 mb-4 py-2 px-4 pl-4 border-sky-300;
 }
 
 .cl-book-body blockquote p,
@@ -163,7 +163,7 @@ h3 {
 }
 
 .badge {
-  @apply inline-grid w-6 h-6 p-1 mx-4 text-sm font-normal rounded-full place-items-center bg-amber-100 text-amber-600;
+  @apply inline-grid w-6 h-6 p-1 mx-4 text-sm font-normal rounded-full place-items-center bg-amber-100 text-amber-700;
 }
 
 .cta-arrow {
