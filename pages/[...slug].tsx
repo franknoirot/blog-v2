@@ -45,7 +45,7 @@ const PageTemplate: NextPageWithLayout = (props) => {
       <Head>
         <title>{page.title}</title>
       </Head>
-      <article className="max-w-2xl py-16 mx-auto">
+      <article className="max-w-3xl py-16 mx-auto page">
         <ReactMarkdown>
           {pageBody}
         </ReactMarkdown>

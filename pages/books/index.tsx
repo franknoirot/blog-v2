@@ -5,6 +5,7 @@ import { ReactElement } from 'react-markdown/lib/react-markdown'
 import BaseLayout from 'components/layouts/BaseLayout'
 import { NextPageWithLayout } from 'lib/utilityTypes'
 import BookCard from 'components/BookCard'
+import ListingPageHeading from 'components/ListingPageHeading'
 
 export async function getStaticProps() {
   const books = allBooks.sort((a, b) => a.title < b.title ? -1 : 1)
@@ -23,7 +24,7 @@ const BookLanding: NextPageWithLayout = (props) => {
         <title>f(n): All Books</title>
       </Head>
 
-      <h1 className="mb-8 text-6xl">All <strong>Books</strong></h1>
+      <ListingPageHeading entryType='Books' entryCount={books.length} />
       <section className='book-section'>
         {books.map((book, idx) => (
           <BookCard key={idx} {...book} />

@@ -94,6 +94,16 @@ h3 {
   @apply my-2;
 }
 
+.cl-book-body blockquote,
+.cl-post-body blockquote {
+  @apply border-l bg-sky-50 py-2 px-4 pl-4 border-sky-300;
+}
+
+.cl-book-body blockquote p,
+.cl-post-body blockquote p {
+  @apply m-0;
+}
+
 .book-section {
   @apply grid gap-2;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -101,7 +111,7 @@ h3 {
 }
 
 .posts-section {
-  @apply grid gap-x-2 gap-y-6;
+  @apply grid gap-x-2 gap-y-8;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: auto;
 }
@@ -112,21 +122,73 @@ h3 {
 
 .seedling::after,
 .budding::after,
-.evergreen::after {
-  @apply inline-block ml-1 align-baseline;
+.evergreen::after,
+.seedling::before,
+.budding::before,
+.evergreen::before {
+  @apply inline-block mx-1 align-baseline;
 }
-.seedling::after {
+.seedling:not(.stage-before)::after {
   content: '🌱';
 }
-.budding::after {
+.budding:not(.stage-before)::after {
   content: '🪴';
 }
-.evergreen::after {
+.evergreen:not(.stage-before)::after {
   content: '🌲';
 }
 
+.seedling::before,
+.budding::before,
+.evergreen::before {
+  @apply ml-0;
+}
+.stage-before.seedling::before {
+  content: '🌱';
+}
+.stage-before.budding::before {
+  content: '🪴';
+}
+.stage-before.evergreen::before {
+  content: '🌲';
+}
+
+
 .post-meta p {
   @apply mb-1 text-sm;
+}
+
+.section-heading {
+  @apply text-3xl mb-4;
+}
+
+.badge {
+  @apply inline-grid w-6 h-6 p-1 mx-4 text-sm font-normal rounded-full place-items-center bg-amber-100 text-amber-600;
+}
+
+.cta-arrow {
+  position: relative;
+  transition: all .11s ease-out;
+}
+
+.cta-arrow::after {
+  content: '→';
+  position: absolute;
+  left: calc(100% + 1ch);
+  transition: transform .11s ease-out;
+}
+
+.group:hover .cta-arrow,
+.group:hover .cta-arrow::after {
+  @apply text-amber-700;
+}
+
+.group:hover .cta-arrow::after {
+  transform: translate(10%);
+}
+
+.page h1 {
+  @apply mb-8 text-6xl;
 }
 
 /**

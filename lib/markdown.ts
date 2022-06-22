@@ -4,7 +4,7 @@ import React from "react";
 type DocumentTypesNoNowUpdates = Book | Page | Post | Project
 
 export function parseObsidianLinks(content: string, isMarkdown: boolean = true): string {
-    const obsidianLinkRegex = /\[\[(.+?(\|.+?)?)\]\]([\W])/g
+    const obsidianLinkRegex = /(?<!\!)\[\[(.+?(\|.+?)?)\]\]([\W])/g
     if (!content) return ''
 
     let transformedContent = content.replace(obsidianLinkRegex, (_, p1, p2, p3) => {
@@ -25,6 +25,12 @@ export function parseObsidianLinks(content: string, isMarkdown: boolean = true):
             ? `[${ linkText }](${ doc.url })` + p3
             : `<a href=${ doc.url } ${ (isExternal(doc.url) ? 'target="_blank" rel="nofollower noopener"' : '')}>${ linkText }</a>`
         return linkMarkup
+    })
+
+    const obsidianInternalImgRegEx = /\!\[\[(.+)\]\]/g
+
+    transformedContent = transformedContent.replace(obsidianInternalImgRegEx, (_, p1) => {
+        return `![](/assets/${p1})`
     })
 
     return transformedContent

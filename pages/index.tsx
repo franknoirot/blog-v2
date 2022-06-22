@@ -7,6 +7,8 @@ import { NextPageWithLayout } from 'lib/utilityTypes'
 import PostCard from 'components/PostCard'
 import BookCard from 'components/BookCard'
 import ProjectCard from 'components/ProjectCard'
+import Link from 'next/link'
+import HeadingWithSeeAll from 'components/HeadingWithSeeAll'
 
 export async function getStaticProps() {
   const byDescLastUpdated = (a: Post | Project, b: Post | Project) => {
@@ -32,25 +34,27 @@ const Home: NextPageWithLayout = (props) => {
       </Head>
 
       <section className="mb-16">
-        <h1 className="mb-2 text-6xl leading-tight"><strong>Frank Noirot</strong> is writing about development, design, ecology, and cities.</h1>
-        <p>Thanks for stopping by! This is my digital garden powered by Obsidian notes and NextJS.</p>
+        <h1 className="mb-4 text-6xl leading-tight"><strong>Frank Noirot</strong> is writing about software, design, ecology, and cities.</h1>
+        <p className='text-xl leading-normal'>
+          Thanks for stopping by! This is my <strong>digital garden 🪴</strong> powered by <a href="https://obsidian.md" rel="noreferrer nofollower" target="_blank">Obsidian</a> notes and <a href="https://nextjs.dev/" rel="noreferrer" target="_blank">NextJS</a>. It contains a subset of my personal &quot;second brain&quot; notes that I think are either polished or interesting enough to publish, along with all of my library books that are available for borrowing, and a selection of projects to which I&lsquo;ve gotten to contribute.
+        </p>
       </section>
 
-      <h2>Notes</h2>
-      <section className='grid grid-cols-3 gap-2'>
-      {posts.map((post, idx) => (
+      <HeadingWithSeeAll href="/posts" totalEntries={posts.length}>Notes</HeadingWithSeeAll>
+      <section className='grid grid-cols-3 gap-2 gap-y-4'>
+      {posts.slice(0,9).map((post, idx) => (
         <PostCard key={idx} {...post} />
       ))}
       </section>
-      <hr className='my-8' />
-      <h2>Books</h2>
+      <hr className='mt-8 mb-14' />
+      <HeadingWithSeeAll href="/books" totalEntries={books.length}>Books</HeadingWithSeeAll>
       <section className='book-section'>
-        {books.map((Book, idx) => (
+        {books.slice(0,8).map((Book, idx) => (
           <BookCard key={idx} {...Book} />
         ))}
       </section>
-      <hr className='my-8' />
-      <h2>Projects</h2>
+      <hr className='mt-8 mb-14' />
+      <HeadingWithSeeAll href="/projects" totalEntries={projects.length}>Projects</HeadingWithSeeAll>
       {projects.map((project, idx) => (
         <ProjectCard key={'project-'+idx} {...project} />
       ))}

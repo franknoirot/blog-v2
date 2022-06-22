@@ -5,6 +5,7 @@ import { ReactElement } from 'react-markdown/lib/react-markdown'
 import BaseLayout from 'components/layouts/BaseLayout'
 import { NextPageWithLayout } from 'lib/utilityTypes'
 import ProjectCard from 'components/ProjectCard'
+import ListingPageHeading from 'components/ListingPageHeading'
 
 export async function getStaticProps() {
   const projects = allProjects.sort((a, b) => {
@@ -25,7 +26,7 @@ const ProjectLanding: NextPageWithLayout = (props) => {
         <title>f(n): All Projects</title>
       </Head>
 
-      <h1 className="mb-8 text-6xl">All <strong>Projects</strong></h1>
+      <ListingPageHeading entryType='Projects' entryCount={projects.length} />
       <section className="posts-section">
         {projects.map((project, idx) => (
           <ProjectCard key={idx} {...project} />

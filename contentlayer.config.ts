@@ -188,6 +188,16 @@ export const Book = defineDocumentType(() => ({
           default: false,
           required: true,
         },
+        created: {
+          type: 'date',
+          description: 'The date of the post',
+          required: true,
+        },
+        updated: {
+          type: 'date',
+          description: 'The date of the post',
+          required: true,
+        },
     },
     computedFields: {
         url: {
