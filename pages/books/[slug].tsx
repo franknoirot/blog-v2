@@ -97,9 +97,11 @@ const BookTemplate: NextPageWithLayout = (props) => {
           <div className="col-span-3">
             <h1 className="mb-1 text-4xl">{book.title}</h1>
             <p>by {book.author}</p>
-            <time dateTime={(book.publishDate || book.firstPublished).toString()} className="text-sm text-slate-600">
-              {book.publishDate || book.firstPublished}
-            </time>
+            { (book.publishDate || book.firstPublished) &&
+              <time dateTime={(book.publishDate || book.firstPublished)?.toString() || ""} className="text-sm text-slate-600">
+                {book.publishDate || book.firstPublished}
+              </time>
+            }
           </div>
         </section>
         <div className="max-w-4xl mx-auto cl-book-body">
