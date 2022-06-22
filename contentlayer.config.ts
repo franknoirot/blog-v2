@@ -57,30 +57,136 @@ export const Book = defineDocumentType(() => ({
             description: 'Title of the book',
             required: true,
         },
-        author: {
+        subtitle: {
             type: 'string',
-            description: 'Author of the book. For now also list any other authors here',
-            required: true,
-        },
-        originallyPublished: {
-            type: 'number',
-            description: 'Year of first publication',
-            required: true,
-        },
-        publishDate: {
-            type: 'number',
-            description: 'Year of owned published copy',
+            description: 'Subtitle of the book, usually after a colon',
             required: false,
-        },
-        format: {
-            type: 'string',
-            description: 'Format of publication, usually "printed" or "digital"',
-            default: 'printed',
         },
         coverImg: {
             type: 'string',
             description: 'Filename and extension of cover image within _assets folder',
             required: true,
+        },
+        author: {
+            type: 'string',
+            description: 'Author of the book. For now also list any other authors here',
+            required: true,
+        },
+        editor: {
+            type: 'string',
+            description: 'Editor of the book. Comma separate any additional editors',
+            required: false,
+        },
+        publisher: {
+            type: 'string',
+            description: 'Publishing company of the owned edition.',
+            required: false,
+        },
+        publishLocation: {
+            type: 'string',
+            description: 'Publishing location of the owned edition.',
+            required: false,
+        },
+        firstPublished: {
+            type: 'number',
+            description: 'Year of first publication',
+            required: false,
+        },
+        publishDate: {
+            type: 'number',
+            description: 'Year of owned published copy',
+            required: true,
+        },
+        edition: {
+            type: 'number',
+            description: 'Edition name of owned published copy',
+            required: false,
+        },
+        category: {
+          type: 'enum',
+          options: [
+            'Fiction',
+            'Nonfiction',
+            'Memoir',
+            'History',
+            'Drama',
+            'Essays',
+            'Poetry',
+            'Periodical',
+            'Biography',
+          ],
+          default: 'Nonfiction',
+          description: `The category of writing the work falls under`,
+          required: false,
+        },
+        language: {
+            type: 'string',
+            description: 'Two-character code of language of publication',
+            default: 'en',
+            required: false,
+        },
+        translator: {
+            type: 'string',
+            description: 'Name of translator if published',
+            required: false,
+        },
+        format: {
+            type: 'string',
+            description: 'Format of publication, usually "Printed Book" or "Digital Book"',
+            default: 'Printed Book',
+            required: false,
+        },
+        coverType: {
+            type: 'string',
+            description: 'Cover of book if printed `format`',
+            default: 'Paperback',
+            required: false,
+        },
+        pages: {
+          type: 'number',
+          description: 'Number of pages in owned published copy',
+          required: false,
+        },
+        locId: {
+          type: 'string',
+          description: 'Library Congress ID of work',
+          required: false,
+        },
+        isbn: {
+          type: 'string',
+          description: 'ISBN of owned edition',
+          required: false,
+        },
+        issn: {
+          type: 'string',
+          description: 'ISSN of owned edition',
+          required: false,
+        },
+        tags: {
+          type: 'string',
+          description: 'Comma-separated list of tags',
+          required: false,
+        },
+        isBorrowed: {
+          type: 'boolean',
+          description: 'Is the book currently checked out (should be documented in `borrowedBy`)',
+          required: false,
+        },
+        borrowedBy: {
+          type: 'string',
+          description: 'Who the book is currently checked out by (if filled, `isBorrowed` should be `true`)',
+          required: false,
+        },
+        rating: {
+          type: 'number',
+          description: 'Personal rating of the book 1-5',
+          required: false,
+        },
+        status: {
+          type: 'boolean',
+          description: 'Has the book been read',
+          default: false,
+          required: true,
         },
     },
     computedFields: {
@@ -90,6 +196,7 @@ export const Book = defineDocumentType(() => ({
         },
     },
 }))
+
 
 export const NowUpdate = defineDocumentType(() => ({
   name: 'NowUpdate',

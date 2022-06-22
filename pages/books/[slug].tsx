@@ -66,9 +66,9 @@ const BookTemplate: NextPageWithLayout = (props) => {
         setValue({ 
           bgColor: {
             start: c[0].hex,
-            end: c[3].hex,
+            end: (c[3]) ? c[3].hex : c[2].hex,
           },
-          squareColor: c[2].hex,
+          squareColor: (c[3]) ? c[2].hex : c[1].hex,
         })
       }
     }
@@ -97,8 +97,8 @@ const BookTemplate: NextPageWithLayout = (props) => {
           <div className="col-span-3">
             <h1 className="mb-1 text-4xl">{book.title}</h1>
             <p>by {book.author}</p>
-            <time dateTime={(book.publishDate || book.originallyPublished).toString()} className="text-sm text-slate-600">
-              {book.publishDate || book.originallyPublished}
+            <time dateTime={(book.publishDate || book.firstPublished).toString()} className="text-sm text-slate-600">
+              {book.publishDate || book.firstPublished}
             </time>
           </div>
         </section>
