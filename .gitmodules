@@ -1,4 +1,0 @@
-[submodule "vault"]
-	path = vault
-	url = https://github.com/franknoirot/personal-notes
-	branch = main
