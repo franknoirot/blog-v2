@@ -1,6 +1,6 @@
 import { allDocuments, Book, DocumentTypes, Page, Post, Project } from "contentlayer/generated";
 import React from "react";
-import { linkTextIdentifier, linkUrlIdentifier } from "./rehypeObsidianLinks";
+import { imageIdentifier, linkTextIdentifier, linkUrlIdentifier } from "./rehypeObsidianLinks";
 
 export type DocumentTypesNoNowUpdates = Book | Page | Post | Project
 
@@ -54,6 +54,8 @@ interface IParseCodeBlockProps extends React.PropsWithChildren {
 
 export function obsidianLinksPostProcess(text: string, allDocuments: DocumentTypes[]) {
     const replaceUrlRegex = new RegExp(linkUrlIdentifier+"/([\\w-]+)(?=\")", 'g')
+
+    text = text.replaceAll(imageIdentifier, '/assets/') || ''
   
   if (replaceUrlRegex.test(text)) {
     const allSlugs = [] as string[];

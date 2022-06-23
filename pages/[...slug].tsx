@@ -1,13 +1,13 @@
 import Head from 'next/head'
-import { allPages, Page } from 'contentlayer/generated'
+import { allDocuments, allPages, Page } from 'contentlayer/generated'
 import { ReactElement } from 'react-markdown/lib/react-markdown'
 import BaseLayout from 'components/layouts/BaseLayout'
 import { NextPageWithLayout } from 'lib/utilityTypes'
-import ReactMarkdown from 'react-markdown'
-import { parseObsidianLinks } from 'lib/markdown'
+import { obsidianLinksPostProcess } from 'lib/markdown'
 import PostCorner from 'components/PostCorner'
 import { ParsedUrlQuery } from 'querystring'
 import { GetStaticProps } from 'next'
+import MdxBody from 'components/MdxBody'
 
 export async function getStaticPaths() {
   const paths = allPages.map((page) => page.url)
@@ -21,24 +21,25 @@ interface IParams extends ParsedUrlQuery {
   slug: string[] | string
 }
 
+type PageMdOrMdx = Page & { body: { code: string }}
+
 export const getStaticProps: GetStaticProps = (context) => {
   const { slug } = context.params as IParams
 
-  const page = allPages.find((page) => page.url.includes((Array.isArray(slug)) ? slug.join('/') : slug)) as Page
-  const pageBody = parseObsidianLinks(page.body.raw)
+  const page = allPages.find((page) => page.url.includes((Array.isArray(slug)) ? slug.join('/') : slug)) as PageMdOrMdx
+  page.body.code = obsidianLinksPostProcess(page.body.code, allDocuments)
 
   return {
     props: {
       page,
-      pageBody,
     },
   }
 }
 
-interface IPageParams { page: Page, pageBody: string }
+interface IPageParams { page: PageMdOrMdx, pageBody: string }
 
 const PageTemplate: NextPageWithLayout = (props) => {
-  const { page, pageBody } = props as IPageParams
+  const { page } = props as IPageParams
   
   return (
     <>
@@ -46,9 +47,7 @@ const PageTemplate: NextPageWithLayout = (props) => {
         <title>{page.title}</title>
       </Head>
       <article className="max-w-3xl py-16 mx-auto page">
-        <ReactMarkdown>
-          {pageBody}
-        </ReactMarkdown>
+        <MdxBody content={ page.body.code }/>
       </article>
     </>
   )

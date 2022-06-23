@@ -31,7 +31,6 @@ export const getStaticProps: GetStaticProps = (context) => {
   const { slug } = context.params as IParams
   const post = allPosts.find((post) => post._raw.sourceFileName.includes(slug)) as PostMdOrMdx
 
-  post.body.code = post.body.code?.replaceAll(imageIdentifier, '/assets/') || ''
   post.body.code = obsidianLinksPostProcess(post.body.code, allDocuments)
 
   return {
