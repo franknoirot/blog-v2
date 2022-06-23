@@ -18,7 +18,7 @@ export default function MdxBody({ content }: { content: string }) {
         <MdxComponent components={{
             Callout,
             a: ({ href, children, ...rest }: ILinkProps) => <Link href={href}><a {...rest}>{ children }</a></Link>,
-            img: ({ src, ...rest }: React.PropsWithoutRef<IImgProps>) => <img src={src} className="my-8" {...rest} />,
+            img: ({ src, ...rest }: React.PropsWithoutRef<IImgProps>) => <img src={src} className="my-8" {...rest}  alt="Alt text is coming soon." />,
           }}>
             {content}
         </MdxComponent>
