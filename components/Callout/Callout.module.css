@@ -1,0 +1,33 @@
+.callout {
+    @apply p-3 pl-6 my-6 border border-l-2 rounded;
+}
+
+.callout.info {
+    @apply bg-sky-50 border-l-sky-500;
+}
+.callout.warning {
+    @apply bg-amber-50 border-l-amber-500;
+}
+.callout.success {
+    @apply bg-lime-50 border-l-lime-500;
+}
+.callout.error {
+    @apply bg-red-50 border-l-red-500;
+}
+
+.heading {
+    @apply my-0 font-normal;
+}
+
+.info .heading {
+    @apply text-sky-700;
+}
+.warning .heading {
+    @apply text-amber-700;
+}
+.success .heading {
+    @apply text-lime-700;
+}
+.error .heading {
+    @apply text-red-700;
+}

@@ -2,7 +2,6 @@ import Link from "next/link";
 import Callout from 'components/Callout'
 import React from "react";
 import { useMDXComponent } from "next-contentlayer/hooks";
-import Image from "next/image";
 
 interface ILinkProps extends React.PropsWithChildren {
     href: string,
