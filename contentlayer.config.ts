@@ -301,9 +301,18 @@ export default makeSource({
         Project,
     ],
     markdown: {
-      remarkPlugins: [remarkFootnotes, remarkPrism, remarkExternalLinks],
+      remarkPlugins: [
+        remarkFootnotes, 
+        [remarkPrism, { transformInlineCode: true }],
+        remarkExternalLinks
+      ],
     },
     mdx: {
-      remarkPlugins: [remarkFootnotes, remarkPrism, remarkExternalLinks, rehypeObsidianLinks],
+      remarkPlugins: [
+        remarkFootnotes,
+        [remarkPrism, { transformInlineCode: true }],
+        remarkExternalLinks,
+        rehypeObsidianLinks
+      ],
     },
 })
