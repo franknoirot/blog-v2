@@ -1,0 +1,12 @@
+.section {
+    @apply md:flex items-center justify-between mb-8;
+}
+
+.searchWrapper {
+    @apply flex items-center gap-2;
+    @apply my-4 pl-4 transition-colors rounded-full bg-amber-100;
+}
+
+.search {
+    @apply block w-full px-4 py-1 border rounded-full border-amber-600;
+}

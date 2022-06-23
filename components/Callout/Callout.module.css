@@ -1,5 +1,5 @@
 .callout {
-    @apply p-3 pl-6 my-6 border border-l-2 rounded;
+    @apply p-3 md:pl-6 my-6 border border-l-2 rounded;
 }
 
 .callout.info {

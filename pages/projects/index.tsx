@@ -24,7 +24,7 @@ const ProjectLanding: NextPageWithLayout = (props) => {
   const [processedProjects, updateProjects] = useState(projects)
   
   return (
-    <div className="max-w-6xl py-16 mx-auto">
+    <div className="max-w-6xl mx-auto md:py-8 lg:py-16">
       <Head>
         <title>f(n): All Projects</title>
       </Head>

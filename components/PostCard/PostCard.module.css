@@ -1,0 +1,11 @@
+.cardWrapper {
+    @apply p-2 transition-colors border rounded md:border-transparent hover:bg-green-50 md:bg-transparent hover:border-green-600;
+}
+
+.heading {
+    @apply mt-0 text-lg font-normal first-letter:capitalize;
+}
+
+.growthStage {
+    @apply inline-block text-xs mr-2 text-green-800 capitalize;
+}

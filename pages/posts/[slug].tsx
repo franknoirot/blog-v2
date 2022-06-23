@@ -56,9 +56,9 @@ const PostTemplate: NextPageWithLayout = (props) => {
       <Head>
         <title>{post.title}</title>
       </Head>
-      <article className="max-w-3xl py-16 mx-auto cl-post-body">
+      <article className="max-w-3xl py-8 mx-auto cl-post-body">
         <div className="mb-8">
-          <h1 className="mb-1 text-5xl leading-tight first-letter:capitalize">{post.title}</h1>
+          <h1 className="mb-1 text-3xl leading-tight md:text-4xl lg:text-5xl first-letter:capitalize">{post.title}</h1>
           <div className="post-meta">
             <p>
               Growth Stage: <span className={"text-green-700 capitalize " + post.growthStage}>{ post.growthStage }</span>

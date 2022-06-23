@@ -3,7 +3,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React from "react"
-import Icon from "./Icon"
+import Icon from "components/Icon"
+import styles from './Nav.module.css'
 
 type NavLink = {
     label: string,
@@ -38,10 +39,10 @@ const Nav: React.FC<INavProps> = ({ navLinks }: { navLinks: NavLink[] }) => {
         ? 'text-amber-800 bg-amber-100'
         : ''
 
-    return <nav className="sticky z-50 grid max-w-md grid-rows-2 px-4 py-2 mx-6 my-5 border rounded-lg border-amber-100 bg-amber-50 w-fit top-4 gap-x-4 gap-y-2" style={{gridTemplateColumns: 'auto 1fr'}}>
+    return <nav className={styles.nav} style={{gridTemplateColumns: 'auto 1fr'}}>
         <Link href="/">
-            <a className="row-span-2 hover:text-amber-500">
-                <Icon type="logo" width={37} />
+            <a className="block w-8 md:w-10 md:row-span-2 hover:text-amber-500">
+                <Icon type="logo" />
             </a>
         </Link>
         <ul className="flex col-start-2 gap-2">
@@ -55,7 +56,7 @@ const Nav: React.FC<INavProps> = ({ navLinks }: { navLinks: NavLink[] }) => {
                 </li>
             ))}
         </ul>
-        <ul className="flex items-center col-start-2 gap-4 px-2">
+        <ul className="items-center hidden col-start-2 row-span-2 gap-4 px-2 md:flex">
             { socialLinks.map(page => (
                 <li key={page.href}>
                     <Link href={page.href}>

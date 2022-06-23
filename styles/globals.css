@@ -54,32 +54,32 @@ h1, h2, h3, h4, h5 {
 }
 
 h2 {
-  @apply mt-6 mb-1;
-  @apply text-3xl;
+  @apply mt-8 mb-1;
+  @apply text-xl md:text-3xl;
 }
 
 h3 {
-  @apply mt-6 mb-1;
-  @apply font-bold text-xl;
+  @apply mt-8 mb-1;
+  @apply font-bold text-lg md:text-xl;
 }
 
 .cl-book-body p,
 .cl-post-body p {
-  @apply mb-6;
+  @apply mb-8;
 }
 
 
 .cl-book-body ul,
 .cl-post-body ul {
-  @apply my-6;
-  @apply list-disc pl-3;
+  @apply my-8;
+  @apply list-disc pl-6;
 }
 
 
 .cl-book-body ol,
 .cl-post-body ol {
-  @apply my-6;
-  @apply list-decimal pl-5;
+  @apply my-8;
+  @apply list-decimal pl-6;
 }
 
 .cl-book-body ol li::marker,
@@ -105,15 +105,39 @@ h3 {
 }
 
 .book-section {
-  @apply grid gap-2;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-auto-rows: auto;
+  @apply grid gap-2 gap-y-8;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+@media only screen and (min-width: 768px) {
+  .book-section {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
 }
 
 .posts-section {
-  @apply grid gap-x-2 gap-y-8;
+  @apply grid gap-x-2 gap-y-6 md:gap-y-8;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: auto;
+}
+
+@media (max-width: 1023px) {
+  .book-section.featured > *:nth-child(n+7) {
+    @apply hidden;
+  }
+
+  .posts-section.featured > *:nth-child(n+9) {
+      @apply hidden;
+  }
+}
+@media (max-width: 767px) {
+  .book-section.featured > *:nth-child(n+5) {
+      @apply hidden;
+  }
+  
+  .posts-section.featured > *:nth-child(n+7) {
+      @apply hidden;
+  }
 }
 
 .post-meta {
@@ -159,11 +183,12 @@ h3 {
 }
 
 .section-heading {
-  @apply text-3xl mb-4;
+  @apply text-xl font-bold md:font-normal text-neutral-600 md:text-current md:text-3xl mb-4;
 }
 
 .badge {
-  @apply inline-grid w-6 h-6 p-1 mx-4 text-sm font-normal rounded-full place-items-center bg-amber-100 text-amber-700;
+  @apply inline-grid w-8 h-6 p-1 mx-4;
+  @apply text-sm font-normal rounded-full place-items-center bg-amber-100 text-amber-700;
 }
 
 .cta-arrow {
@@ -188,7 +213,7 @@ h3 {
 }
 
 .page h1 {
-  @apply mb-8 text-6xl;
+  @apply mb-4 md:mb-8 text-4xl md:text-6xl;
 }
 
 /**

@@ -28,33 +28,33 @@ const Home: NextPageWithLayout = (props) => {
   const { posts, books, projects } = props as IHomeProps
   
   return (
-    <div className="max-w-5xl py-16 mx-auto">
+    <div className="mx-auto md:py-8 lg:py-16 lg:max-w-5xl">
       <Head>
         <title>Frank Noirot&apos;s Digital Garden</title>
       </Head>
 
-      <section className="mb-16">
-        <h1 className="mb-4 text-6xl leading-tight"><strong>Frank Noirot</strong> is writing about software, design, ecology, and cities.</h1>
-        <p className='text-xl leading-normal'>
-          Thanks for stopping by! This is my <strong>digital garden 🪴</strong> powered by <a href="https://obsidian.md" rel="noreferrer nofollower" target="_blank">Obsidian</a> notes and <a href="https://nextjs.dev/" rel="noreferrer" target="_blank">NextJS</a>. It contains a subset of my personal &quot;second brain&quot; notes that I think are either polished or interesting enough to publish, along with all of my library books that are available for borrowing, and a selection of projects to which I&lsquo;ve gotten to contribute.
+      <section className="mb-8 md:mb-16">
+        <h1 className="mb-4 text-2xl leading-tight md:text-4xl lg:text-6xl"><strong>Frank Noirot</strong> is writing about software, design, ecology, and cities.</h1>
+        <p className='leading-normal md:text-xl'>
+          Thanks for stopping by my <strong>digital garden 🪴</strong>! It contains my notes that I think are either polished or interesting enough to publish, along with all of my library books that are available for borrowing, and a selection of projects to which I&lsquo;ve gotten to contribute.
         </p>
       </section>
 
       <HeadingWithSeeAll href="/posts" totalEntries={posts.length}>Notes</HeadingWithSeeAll>
-      <section className='grid grid-cols-3 gap-2 gap-y-4'>
+      <section className='posts-section featured'>
       {posts.slice(0,9).map((post, idx) => (
         <PostCard key={idx} {...post} />
       ))}
       </section>
       <hr className='mt-8 mb-14' />
       <HeadingWithSeeAll href="/books" totalEntries={books.length}>Books</HeadingWithSeeAll>
-      <section className='book-section'>
+      <section className='book-section featured'>
         {books.slice(0,8).map((Book, idx) => (
           <BookCard key={idx} {...Book} />
         ))}
       </section>
       <hr className='mt-8 mb-14' />
-      <HeadingWithSeeAll href="/projects" totalEntries={projects.length}>Projects</HeadingWithSeeAll>
+      <HeadingWithSeeAll href="/projects featured" totalEntries={projects.length}>Projects</HeadingWithSeeAll>
       {projects.map((project, idx) => (
         <ProjectCard key={'project-'+idx} {...project} />
       ))}

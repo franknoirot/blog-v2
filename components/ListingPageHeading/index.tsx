@@ -1,6 +1,7 @@
 import { Document } from 'contentlayer/core'
 import Fuse from 'fuse.js'
 import React, { FormEvent, useState } from 'react'
+import styles from './ListingPageHeading.module.css'
 
 interface IListingPageHeadingProps {
     entryType: string,
@@ -25,19 +26,19 @@ export default function ListingPageHeading({ entryType, entries, searchConfig, u
         updateResultCount(newResults.length)
     }
 
-    return (<div className="flex items-center justify-between mb-8 group">
-        <h1 className="text-6xl">
+    return (<section className={styles.section + ' group'}>
+        <h1 className="text-4xl md:text-6xl">
         All <strong>{ entryType }</strong>
         <small className="align-middle badge group-focus-within:bg-amber-200">{ resultsCount }</small>
       </h1>
-      <div className="flex items-center gap-2 pl-4 transition-colors rounded-full group-focus-within:bg-amber-200 bg-amber-100">
+      <div className={styles.searchWrapper + ' group-focus-within:bg-amber-200'}>
         <span>🔍</span>
         <input
             type="text"
-            className="px-4 py-1 border rounded-full border-amber-600"
+            className={styles.search}
             onChange={onChange}
             placeholder={`Search ${entries.length} ${entryType}`}
         />
       </div>
-    </div>)
+    </section>)
 }

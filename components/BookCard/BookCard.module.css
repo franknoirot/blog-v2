@@ -1,0 +1,11 @@
+.card {
+    @apply text-left;
+}
+
+.coverWrapper {
+    max-width: 250px;
+}
+
+.heading {
+    @apply mt-2 md:text-lg font-normal group-hover:text-blue-600
+}

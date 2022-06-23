@@ -23,7 +23,7 @@ const PostLanding: NextPageWithLayout = (props) => {
   const [processedPosts, updatePosts] = useState(posts)
   
   return (
-    <div className="max-w-6xl py-16 mx-auto">
+    <div className="max-w-6xl mx-auto md:py-8 lg:py-16to">
       <Head>
         <title>f(n): All Notes</title>
       </Head>
@@ -33,7 +33,7 @@ const PostLanding: NextPageWithLayout = (props) => {
           keys: ['title', 'category', 'growthStage']
         }}
       />
-      <p className="mb-12 text-lg">
+      <p className="max-w-4xl mb-12 md:text-lg">
         This site is a tool to get me to write more, so these notes are made public in various stages of growth before they can be called &quot;evergreen&quot;. Some of them may be half-baked or wrong, but I need dense thoughts before I can have refined thoughts. I encourage anyone interested in my writing to reach out to me with questions, corrections, and connections about any of these thoughts below.
       </p>
       <section className="posts-section">
