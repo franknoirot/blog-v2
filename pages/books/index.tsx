@@ -6,6 +6,7 @@ import BaseLayout from 'components/layouts/BaseLayout'
 import { NextPageWithLayout } from 'lib/utilityTypes'
 import BookCard from 'components/BookCard'
 import ListingPageHeading from 'components/ListingPageHeading'
+import { useMemo, useState } from 'react'
 
 export async function getStaticProps() {
   const books = allBooks.sort((a, b) => a.title < b.title ? -1 : 1)
@@ -17,6 +18,7 @@ interface IBookLandingProps { books: Book[] }
 
 const BookLanding: NextPageWithLayout = (props) => {
   const { books } = props as IBookLandingProps
+  const [processedBooks, updateBooks] = useState(books)
   
   return (
     <div className="max-w-6xl py-16 mx-auto">
@@ -24,9 +26,20 @@ const BookLanding: NextPageWithLayout = (props) => {
         <title>f(n): All Books</title>
       </Head>
 
-      <ListingPageHeading entryType='Books' entryCount={books.length} />
+      <ListingPageHeading entryType='Books' entries={books} updateEntries={updateBooks}
+        searchConfig={{
+          keys: [
+            'title',
+            'subtitle',
+            'category',
+            'author',
+          ],
+          shouldSort: true,
+          includeMatches: true,
+        }}
+      />
       <section className='book-section'>
-        {books.map((book, idx) => (
+        {processedBooks.map((book, idx) => (
           <BookCard key={idx} {...book} />
         ))}
       </section>

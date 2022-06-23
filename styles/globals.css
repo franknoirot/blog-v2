@@ -55,12 +55,12 @@ h1, h2, h3, h4, h5 {
 
 h2 {
   @apply mt-6 mb-1;
-  @apply text-lg font-bold;
+  @apply text-3xl;
 }
 
 h3 {
   @apply mt-6 mb-1;
-  @apply font-bold;
+  @apply font-bold text-xl;
 }
 
 .cl-book-body p,

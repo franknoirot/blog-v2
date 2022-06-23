@@ -226,6 +226,7 @@ export const NowUpdate = defineDocumentType(() => ({
 export const Page = defineDocumentType(() => ({
   name: 'Page',
   filePathPattern: `pages/**/*.md*`,
+  contentType: 'mdx',
   fields: {
       title: {
           type: 'string',

@@ -6,6 +6,8 @@ import BaseLayout from 'components/layouts/BaseLayout'
 import { NextPageWithLayout } from 'lib/utilityTypes'
 import ProjectCard from 'components/ProjectCard'
 import ListingPageHeading from 'components/ListingPageHeading'
+import { useState } from 'react'
+
 
 export async function getStaticProps() {
   const projects = allProjects.sort((a, b) => {
@@ -19,6 +21,7 @@ interface IProjectLandingProps { projects: Project[] }
 
 const ProjectLanding: NextPageWithLayout = (props) => {
   const { projects } = props as IProjectLandingProps
+  const [processedProjects, updateProjects] = useState(projects)
   
   return (
     <div className="max-w-6xl py-16 mx-auto">
@@ -26,9 +29,13 @@ const ProjectLanding: NextPageWithLayout = (props) => {
         <title>f(n): All Projects</title>
       </Head>
 
-      <ListingPageHeading entryType='Projects' entryCount={projects.length} />
+      <ListingPageHeading entryType='Projects' entries={projects} updateEntries={updateProjects}
+        searchConfig={{
+          keys: ['title', 'author']
+        }}
+      />
       <section className="posts-section">
-        {projects.map((project, idx) => (
+        {processedProjects.map((project, idx) => (
           <ProjectCard key={idx} {...project} />
         ))}
       </section>
