@@ -40,6 +40,12 @@ article a {
   color: hsl(210deg, 80%, 35%); 
 }
 
+/* Solves private Obsidian document links! */
+/* See `lib/markdown.ts` line 66 */
+article a[href$="#"] {
+  @apply text-inherit pointer-events-none cursor-default;
+}
+
 article a[target="_blank"]::after {
   content: '⧉';
   @apply inline-block ml-1;
@@ -65,7 +71,7 @@ h3 {
 
 .cl-book-body p,
 .cl-post-body p {
-  @apply mb-8;
+  @apply mb-8 leading-relaxed;
 }
 
 
