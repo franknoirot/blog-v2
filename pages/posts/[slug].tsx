@@ -1,16 +1,15 @@
 import Head from 'next/head'
 import { format, parseISO } from 'date-fns'
-import { allPosts, Post } from 'contentlayer/generated'
 import { GetStaticProps } from 'next'
-import ReactMarkdown from 'react-markdown'
-import { parseObsidianLinks } from 'lib/markdown'
+import { obsidianLinksPostProcess } from 'lib/markdown'
 import { ParsedUrlQuery } from 'querystring'
 import { ReactElement } from 'react-markdown/lib/react-markdown'
 import BaseLayout from 'components/layouts/BaseLayout'
 import { NextPageWithLayout } from 'lib/utilityTypes'
 import PostCorner from 'components/PostCorner'
-import Callout from 'components/Callout'
-import { useRef } from 'react'
+import { allDocuments, allPosts, type Post } from 'contentlayer/generated'
+import { imageIdentifier } from 'lib/rehypeObsidianLinks'
+import MdxBody from 'components/MdxBody'
 
 
 
@@ -26,10 +25,14 @@ interface IParams extends ParsedUrlQuery {
   slug: string
 }
 
+type PostMdOrMdx = Post & { body: { code: string }}
+
 export const getStaticProps: GetStaticProps = (context) => {
   const { slug } = context.params as IParams
-  const post = allPosts.find((post) => post._raw.sourceFileName.includes(slug)) as Post
-  post.body.raw = parseObsidianLinks(post.body.raw)
+  const post = allPosts.find((post) => post._raw.sourceFileName.includes(slug)) as PostMdOrMdx
+
+  post.body.code = post.body.code?.replaceAll(imageIdentifier, '/assets/') || ''
+  post.body.code = obsidianLinksPostProcess(post.body.code, allDocuments)
 
   return {
     props: {
@@ -38,7 +41,7 @@ export const getStaticProps: GetStaticProps = (context) => {
   }
 }
 
-interface IPostParams { post: Post }
+interface IPostParams { post: PostMdOrMdx }
 
 interface ICodeComponentParams extends React.PropsWithChildren {
   node: any,
@@ -69,9 +72,7 @@ const PostTemplate: NextPageWithLayout = (props) => {
             </p>
           </div>
         </div>
-        <ReactMarkdown>
-          {post.body.raw}
-        </ReactMarkdown>
+        <MdxBody content={ post.body.code }/>
       </article>
     </>
   )

@@ -1,12 +1,15 @@
 import remarkFootnotes from 'remark-footnotes'
 import remarkPrism from 'remark-prism'
 import remarkExternalLinks from 'remark-external-links'
+// import remarkObsidian from 'remark-obsidian'
+import rehypeObsidianLinks from './lib/rehypeObsidianLinks'
 import { defineDocumentType, makeSource } from 'contentlayer/source-files'
 // import { parseObsidianLinks } from './lib/markdown'
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
   filePathPattern: `posts/**/*.md*`,
+  contentType: 'mdx',
   fields: {
     title: {
       type: 'string',
@@ -186,7 +189,6 @@ export const Book = defineDocumentType(() => ({
           type: 'boolean',
           description: 'Has the book been read',
           default: false,
-          required: true,
         },
         created: {
           type: 'date',
@@ -297,7 +299,10 @@ export default makeSource({
         Page,
         Project,
     ],
-    mdx: {
+    markdown: {
       remarkPlugins: [remarkFootnotes, remarkPrism, remarkExternalLinks],
+    },
+    mdx: {
+      remarkPlugins: [remarkFootnotes, remarkPrism, remarkExternalLinks, rehypeObsidianLinks],
     },
 })

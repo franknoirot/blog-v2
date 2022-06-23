@@ -1,7 +1,8 @@
-import { allDocuments, Book, Page, Post, Project } from "contentlayer/generated";
+import { allDocuments, Book, DocumentTypes, Page, Post, Project } from "contentlayer/generated";
 import React from "react";
+import { linkTextIdentifier, linkUrlIdentifier } from "./rehypeObsidianLinks";
 
-type DocumentTypesNoNowUpdates = Book | Page | Post | Project
+export type DocumentTypesNoNowUpdates = Book | Page | Post | Project
 
 export function parseObsidianLinks(content: string, isMarkdown: boolean = true): string {
     const obsidianLinkRegex = /(?<!\!)\[\[(.+?(\|.+?)?)\]\]([\W])/g
@@ -49,4 +50,29 @@ interface IParseCodeBlockProps extends React.PropsWithChildren {
     inline: boolean,
     className: string,
     props: any,
+}
+
+export function obsidianLinksPostProcess(text: string, allDocuments: DocumentTypes[]) {
+    const replaceUrlRegex = new RegExp(linkUrlIdentifier+"/([\\w-]+)(?=\")", 'g')
+  
+  if (replaceUrlRegex.test(text)) {
+    const allSlugs = [] as string[];
+    const allLinkedDocs = [] as DocumentTypesNoNowUpdates[];
+
+    text = text.replace(replaceUrlRegex, (_: string, p1: string) => {
+      const foundDoc = allDocuments.find(doc => doc._raw.sourceFileName.includes(p1)) as (DocumentTypesNoNowUpdates | undefined)
+      if (!foundDoc) return ''
+      allSlugs.push(p1)
+      allLinkedDocs.push(foundDoc)
+
+      return foundDoc.url
+    })
+
+    const replaceLabelRegex = new RegExp(linkTextIdentifier+"([\\w-\\s]+)"+linkTextIdentifier, 'g')
+    text = text.replace(replaceLabelRegex, (_: string, p1: string) => {
+      return allLinkedDocs.find(doc => doc._raw.sourceFileName.includes(p1))?.title || p1
+    })
+  }
+
+  return text
 }
