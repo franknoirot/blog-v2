@@ -7,7 +7,7 @@ export default function ProjectCard(project: Project) {
     return (
       <Link href={project.url}>
         <a className={styles.cardWrapper + ' group'}
-          style={{'--h': `${project.color?.h}deg`, '--s': `${project.color?.s}%`, '--l': `${project.color?.l}%`}}
+          style={{'--h': `${project.color?.h}deg`, '--s': `${project.color?.s}%`, '--l': `${project.color?.l}%`} as React.CSSProperties}
         >
             <h2 className={styles.heading}>{project.title}</h2>
             <div className={styles.meta}>

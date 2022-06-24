@@ -48,7 +48,7 @@ const ProjectTemplate: NextPageWithLayout = (props) => {
         description={`Built as part of work with ${project.organization}, where I served as ${project.role} and used ${project.tools}.`}
       />
       <article className={styles.wrapper + ' cl-post-body'}
-        style={{'--h': `${project.color?.h}deg`, '--s': `${project.color?.s}%`, '--l': `${project.color?.l}%`}}
+        style={{'--h': `${project.color?.h}deg`, '--s': `${project.color?.s}%`, '--l': `${project.color?.l}%`} as React.CSSProperties}
       >
         <div className={styles.topArea}>
           <figure className={styles.featuredImg}>

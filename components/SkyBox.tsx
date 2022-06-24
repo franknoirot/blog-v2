@@ -20,8 +20,8 @@ export default function SkyBox({ className = 'inset-0 bg-red-100' }) {
     function onChange(e: FormEvent<HTMLInputElement>) {
         e.preventDefault()
         e.persist()
-        const hours = (Math.floor(e.target.value / 60))
-        const minutes = e.target.value % 60
+        const hours = (Math.floor(parseInt(e.currentTarget.value) / 60))
+        const minutes = parseInt(e.currentTarget.value) % 60
         const newTime = new Date(`2022-06-24T${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`)
 
         console.log({ h, time, sD, zenith, azimuth })
