@@ -12,6 +12,7 @@ import extractColors from 'extract-colors'
 import { useContext, useEffect } from 'react'
 import BookLayout, { BookContext } from 'components/layouts/BookLayout'
 import Seo from 'components/Seo'
+import Citation from 'components/Citation'
 
 export async function getStaticPaths() {
   const paths = allBooks.map((book) => book.url)
@@ -105,17 +106,23 @@ const BookTemplate: NextPageWithLayout = (props) => {
               )}
             </h1>
             <div className="grid grid-cols-2 mt-6 text-sm md:grid-cols-3 md:mb-6 gap-x-2 gap-y-3 book-meta text-slate-600">
-            <p>{(book.editor) ? "edited " : ''}by {book.author || book.editor || "unknown" }</p>
-            { (book.publishDate || book.firstPublished) &&
-              <time dateTime={(book.publishDate || book.firstPublished)?.toString() || ""}>
-                {book.publishDate || book.firstPublished}
-              </time>
+            <p>{(!book.author && book.editor) ? "edited " : ''}by {book.author || book.editor || "unknown" }</p>
+            { (book.publishDate || book.firstPublished) && <p>
+                published in&nbsp;
+                <time dateTime={(book.publishDate || book.firstPublished)?.toString() || ""}>
+                  {book.publishDate || book.firstPublished}
+                </time>
+              </p>
             }
+            { (book.publishDate && book.firstPublished) && <p>first published in {book.firstPublished}</p>}
+            { (book.author && book.editor) && <p>edited by { book.editor }</p> }
+            { (book.translator) && <p>translated by { book.translator }</p> }
             { (book.category) && <p>{ book.category }</p> }
+            <p>{ book.isBorrowed ? "ⓧ Currently checked out" : "✔ Available to borrow" }</p>
+            { (book.pages) && <p>{ book.pages } pages</p> }
             { (book.publisher) && <p>published by { book.publisher }</p> }
             { (book.publishLocation) && <p>published in { book.publishLocation }</p> }
-            { (book.pages) && <p>{ book.pages } pages</p> }
-            <p>{ book.isBorrowed ? "ⓧ Currently checked out" : "✔ Available to borrow" }</p>
+            { (book.format) && <p>owned in { book.format } format</p> }
             </div>
           </div>
         </section>
@@ -123,6 +130,8 @@ const BookTemplate: NextPageWithLayout = (props) => {
           <ReactMarkdown>
             {bookBody}
           </ReactMarkdown>
+          <h2>Citation</h2>
+          <Citation {...book} />
         </div>
       </article>
     </>
