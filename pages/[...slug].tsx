@@ -60,7 +60,7 @@ PageTemplate.getLayout = function getLayout(page: ReactElement) {
     <BaseLayout>
       {page}
     </BaseLayout>
-    <PostCorner bgColor={{start: "blue", end: "navy"}} circleColor="teal" />
+    {/* <PostCorner bgColor={{start: "blue", end: "navy"}} circleColor="teal" /> */}
   </>)
 }
 

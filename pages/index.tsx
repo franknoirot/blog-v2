@@ -60,22 +60,24 @@ const Home: NextPageWithLayout = (props) => {
 
       <HeadingWithSeeAll href="/posts" totalEntries={posts.length}>Notes</HeadingWithSeeAll>
       <section className='posts-section featured'>
-      {posts.slice(0,9).map((post, idx) => (
-        <PostCard key={idx} {...post} />
-      ))}
-      </section>
-      <hr className='mt-8 mb-14' />
-      <HeadingWithSeeAll href="/books" totalEntries={books.length}>Books</HeadingWithSeeAll>
-      <section className='book-section featured'>
-        {books.slice(0,8).map((Book, idx) => (
-          <BookCard key={idx} {...Book} />
+        {posts.slice(0,9).map((post, idx) => (
+          <PostCard key={idx} {...post} />
         ))}
       </section>
       <hr className='mt-8 mb-14' />
-      <HeadingWithSeeAll href="/projects featured" totalEntries={projects.length}>Projects</HeadingWithSeeAll>
-      {projects.map((project, idx) => (
-        <ProjectCard key={'project-'+idx} {...project} />
-      ))}
+      <HeadingWithSeeAll href="/books" totalEntries={books.length}>Books</HeadingWithSeeAll>
+        <section className='book-section featured'>
+          {books.slice(0,8).map((Book, idx) => (
+            <BookCard key={idx} {...Book} />
+          ))}
+      </section>
+      <hr className='mt-8 mb-14' />
+      <HeadingWithSeeAll href="/projects" totalEntries={projects.length}>Projects</HeadingWithSeeAll>
+      <section className='project-section featured'>
+        {projects.map((project, idx) => (
+          <ProjectCard key={'project-'+idx} {...project} />
+        ))}
+      </section>
     </div>
   )
 }
