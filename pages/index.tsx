@@ -16,9 +16,24 @@ export async function getStaticProps() {
   }
 
   const posts = allPosts.sort(byDescLastUpdated)
+    .map(({ url, title, growthStage, category, updated }) => ({ url, title, growthStage, category, updated }))
+    
   const projects = allProjects.sort(byDescLastUpdated)
 
   const books = allBooks.sort((a, b) => a.title > b.title ? 1 : -1)
+    .map(({ // send a subset of the book data to not overwhelm the page.
+      title,
+      author,
+      editor,
+      url,
+      coverImg,
+    }) => ({
+      title,
+      author: author || "",
+      editor: editor || "",
+      url,
+      coverImg,
+    }))
   return { props: { posts, books, projects } }
 }
 
