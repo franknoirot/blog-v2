@@ -47,7 +47,7 @@ const ProjectTemplate: NextPageWithLayout = (props) => {
         title={project.title + " | Frank Noirot"}
         description={`Built as part of work with ${project.organization}, where I served as ${project.role} and used ${project.tools}.`}
       />
-      <article className={styles.wrapper}
+      <article className={styles.wrapper + ' cl-post-body'}
         style={{'--h': `${project.color?.h}deg`, '--s': `${project.color?.s}%`, '--l': `${project.color?.l}%`}}
       >
         <div className={styles.topArea}>
@@ -68,7 +68,9 @@ const ProjectTemplate: NextPageWithLayout = (props) => {
             </div>
           </div>
         </div>
-        <MdxBody content={ project.body.code }/>
+        <div className={styles.bodyWrapper}>
+          <MdxBody content={ project.body.code }/>
+        </div>
       </article>
     </>
   )
