@@ -7,6 +7,7 @@ import { NextPageWithLayout } from 'lib/utilityTypes'
 import PostCard from 'components/PostCard'
 import ListingPageHeading from 'components/ListingPageHeading'
 import { useState } from 'react'
+import Seo from 'components/Seo'
 
 
 export async function getStaticProps() {
@@ -25,9 +26,10 @@ const PostLanding: NextPageWithLayout = (props) => {
   
   return (
     <div className="max-w-6xl mx-auto md:py-8 lg:py-16to">
-      <Head>
-        <title>f(n): All Notes</title>
-      </Head>
+      <Seo
+        title={`Frank Noirot: All Notes`}
+        description={`My digital garden of writing on software development and UX design, with occasional thoughts on urban planning, ecological design, and skateboarding.`}
+      />
 
       <ListingPageHeading entryType='Notes' entries={posts} updateEntries={updatePosts}
         searchConfig={{

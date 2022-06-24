@@ -7,6 +7,7 @@ import { NextPageWithLayout } from 'lib/utilityTypes'
 import ProjectCard from 'components/ProjectCard'
 import ListingPageHeading from 'components/ListingPageHeading'
 import { useState } from 'react'
+import Seo from 'components/Seo'
 
 
 export async function getStaticProps() {
@@ -25,9 +26,10 @@ const ProjectLanding: NextPageWithLayout = (props) => {
   
   return (
     <div className="max-w-6xl mx-auto md:py-8 lg:py-16">
-      <Head>
-        <title>f(n): All Projects</title>
-      </Head>
+      <Seo
+        title={`Frank Noirot's Projects`}
+        description={`Assorted projects from Frank Noirot's career as a web developer and product manager, with some assorted personal work thrown in.`}
+      />
 
       <ListingPageHeading entryType='Projects' entries={projects} updateEntries={updateProjects}
         searchConfig={{

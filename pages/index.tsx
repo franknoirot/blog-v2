@@ -9,6 +9,7 @@ import BookCard from 'components/BookCard'
 import ProjectCard from 'components/ProjectCard'
 import Link from 'next/link'
 import HeadingWithSeeAll from 'components/HeadingWithSeeAll'
+import Seo from 'components/Seo'
 
 export async function getStaticProps() {
   const byDescLastUpdated = (a: Post | Project, b: Post | Project) => {
@@ -44,9 +45,11 @@ const Home: NextPageWithLayout = (props) => {
   
   return (
     <div className="mx-auto md:py-8 lg:py-16 lg:max-w-5xl">
-      <Head>
-        <title>Frank Noirot&apos;s Digital Garden</title>
-      </Head>
+      <Seo
+        title={`Frank Noirot's Digital Garden`}
+        description={`Frank Noirot (he/him) is a Product Manager based in NYC. He's writing about software, design, ecology, and cities.`}
+        image="/assets/about-me.jpg"
+      />
 
       <section className="mb-8 md:mb-16">
         <h1 className="mb-4 text-2xl leading-tight md:text-4xl lg:text-6xl"><strong>Frank Noirot</strong> is writing about software, design, ecology, and cities.</h1>

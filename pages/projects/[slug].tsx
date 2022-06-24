@@ -7,6 +7,7 @@ import { ReactElement } from 'react-markdown/lib/react-markdown'
 import BaseLayout from 'components/layouts/BaseLayout'
 import { NextPageWithLayout } from 'lib/utilityTypes'
 import { ParsedUrlQuery } from 'querystring'
+import Seo from 'components/Seo'
 
 export async function getStaticPaths() {
   const paths = allProjects.map((project) => project.url)
@@ -40,9 +41,10 @@ const ProjectTemplate: NextPageWithLayout = (props) => {
   
   return (
     <>
-      <Head>
-        <title>{project.title} | franknoirot.co</title>
-      </Head>
+      <Seo
+        title={project.title + " | Frank Noirot"}
+        description={`Built as part of work with ${project.organization}, where I served as ${project.role} and used ${project.tools}.`}
+      />
       <article className="max-w-2xl py-16 mx-auto">
         <div className="mb-6 text-center">
           <h1 className="mb-1 text-3xl font-bold">{project.title}</h1>

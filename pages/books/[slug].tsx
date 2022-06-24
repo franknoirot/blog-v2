@@ -11,6 +11,7 @@ import { NextPageWithLayout } from 'lib/utilityTypes'
 import extractColors from 'extract-colors'
 import { useContext, useEffect } from 'react'
 import BookLayout, { BookContext } from 'components/layouts/BookLayout'
+import Seo from 'components/Seo'
 
 export async function getStaticPaths() {
   const paths = allBooks.map((book) => book.url)
@@ -78,9 +79,10 @@ const BookTemplate: NextPageWithLayout = (props) => {
   
   return (
     <>
-      <Head>
-        <title>{book.title} | franknoirot.co</title>
-      </Head>
+      <Seo
+        title={book.title +  ` | Frank Noirot's Library`}
+        description={`${ book.isBorrowed ? "ⓧ Currently checked out" : "✔ Available to borrow" }. Filed under ${book.category}. ${((book.editor) ? "Edited B" : 'B') + `y ` + (book.author || book.editor || "unknown") }. Copy published in ${book.publishDate}${book.pages ? ', ' + book.pages + ' pages.' : '.'}`}
+      />
       <article className="max-w-6xl mx-auto md:py-8 lg:py-16">
         <section className="grid items-center grid-cols-2 mb-10 border-b md:pb-12 md:grid-cols-5">
           <div className='col-span-2 cl-book-cover'>

@@ -41,6 +41,7 @@ export const Post = defineDocumentType(() => ({
     description: {
       type: 'string',
       description: 'The metadata description of the post',
+      required: true,
     },
   },
   computedFields: {

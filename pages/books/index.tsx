@@ -7,6 +7,7 @@ import { NextPageWithLayout } from 'lib/utilityTypes'
 import BookCard from 'components/BookCard'
 import ListingPageHeading from 'components/ListingPageHeading'
 import { useMemo, useState } from 'react'
+import Seo from 'components/Seo'
 
 export async function getStaticProps() {
   const books = allBooks.sort((a, b) => a.title < b.title ? -1 : 1)
@@ -39,9 +40,10 @@ const BookLanding: NextPageWithLayout = (props) => {
   
   return (
     <div className="max-w-6xl mx-auto md:py-8 lg:py-16">
-      <Head>
-        <title>f(n): All Books</title>
-      </Head>
+      <Seo
+        title={`Frank Noirot: All Books`}
+        description={`Books that I own that I have thoughts on. Nearly all are available to borrow upon request. In fact I'll ship one to you to if you promise to send it back 💞`}
+      />
 
       <ListingPageHeading entryType='Books' entries={books} updateEntries={updateBooks}
         searchConfig={{

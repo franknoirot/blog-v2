@@ -8,6 +8,7 @@ import PostCorner from 'components/PostCorner'
 import { ParsedUrlQuery } from 'querystring'
 import { GetStaticProps } from 'next'
 import MdxBody from 'components/MdxBody'
+import Seo from 'components/Seo'
 
 export async function getStaticPaths() {
   const paths = allPages.map((page) => page.url)
@@ -43,9 +44,10 @@ const PageTemplate: NextPageWithLayout = (props) => {
   
   return (
     <>
-      <Head>
-        <title>{page.title}</title>
-      </Head>
+      <Seo
+        title={page.title + " | Frank Noirot"}
+        description={page.description}
+      />
       <article className="max-w-3xl mx-auto md:py-8 page">
         <MdxBody content={ page.body.code }/>
       </article>

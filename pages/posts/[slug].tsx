@@ -10,6 +10,7 @@ import PostCorner from 'components/PostCorner'
 import { allDocuments, allPosts, type Post } from 'contentlayer/generated'
 import { imageIdentifier } from 'lib/rehypeObsidianLinks'
 import MdxBody from 'components/MdxBody'
+import Seo from 'components/Seo'
 
 
 
@@ -53,9 +54,10 @@ const PostTemplate: NextPageWithLayout = (props) => {
     
   return (
     <>
-      <Head>
-        <title>{post.title}</title>
-      </Head>
+      <Seo
+        title={post.title + ' | Frank Noirot'}
+        description={post.description}
+      />
       <article className="max-w-3xl py-8 mx-auto cl-post-body">
         <div className="mb-8">
           <h1 className="mb-1 text-3xl leading-tight md:text-4xl lg:text-5xl first-letter:capitalize">{post.title}</h1>
