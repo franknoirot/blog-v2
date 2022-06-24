@@ -16,12 +16,12 @@ export async function getStaticProps() {
     return compareDesc(new Date(a.updated), new Date(b.updated))
   }
 
-  const posts = allPosts.sort(byDescLastUpdated).slice(0,8)
+  const posts = allPosts.sort(byDescLastUpdated)
     .map(({ url, title, growthStage, category, updated }) => ({ url, title, growthStage, category, updated }))
     
   const projects = allProjects.sort(byDescLastUpdated)
 
-  const books = allBooks.sort(byDescLastUpdated).slice(0,8)
+  const books = allBooks.sort(byDescLastUpdated)
     .map(({ // send a subset of the book data to not overwhelm the page.
       title,
       author,
@@ -35,13 +35,36 @@ export async function getStaticProps() {
       url,
       coverImg,
     }))
-  return { props: { posts, books, projects } }
+
+  const totals = {
+    posts: posts.length,
+    books: books.length,
+    projects: projects.length,
+  }
+
+  return {
+    props: {
+      posts: posts.slice(0, 9),
+      books: books.slice(0, 8),
+      projects: projects.slice(0, 6),
+      totals,
+    }
+  }
 }
 
-interface IHomeProps { posts: Post[], books: Book[], projects: Project[] }
+interface IHomeProps {
+  posts: Post[],
+  books: Book[],
+  projects: Project[],
+  totals: {
+    posts: number,
+    books: number,
+    projects: number,
+  }
+}
 
 const Home: NextPageWithLayout = (props) => {
-  const { posts, books, projects } = props as IHomeProps
+  const { posts, books, projects, totals } = props as IHomeProps
   
   return (
     <div className="mx-auto md:py-8 lg:py-16 lg:max-w-5xl">
@@ -58,21 +81,21 @@ const Home: NextPageWithLayout = (props) => {
         </p>
       </section>
 
-      <HeadingWithSeeAll href="/posts" totalEntries={posts.length}>Notes</HeadingWithSeeAll>
+      <HeadingWithSeeAll href="/posts" totalEntries={totals.posts}>Notes</HeadingWithSeeAll>
       <section className='posts-section featured'>
         {posts.map((post, idx) => (
           <PostCard key={idx} {...post} />
         ))}
       </section>
       <hr className='mt-8 mb-14' />
-      <HeadingWithSeeAll href="/books" totalEntries={books.length}>Books</HeadingWithSeeAll>
+      <HeadingWithSeeAll href="/books" totalEntries={totals.books}>Books</HeadingWithSeeAll>
         <section className='book-section featured'>
           {books.map((Book, idx) => (
             <BookCard key={idx} {...Book} />
           ))}
       </section>
       <hr className='mt-8 mb-14' />
-      <HeadingWithSeeAll href="/projects" totalEntries={projects.length}>Projects</HeadingWithSeeAll>
+      <HeadingWithSeeAll href="/projects" totalEntries={totals.projects}>Projects</HeadingWithSeeAll>
       <section className='projects-section featured'>
         {projects.map((project, idx) => (
           <ProjectCard key={'project-'+idx} {...project} />
