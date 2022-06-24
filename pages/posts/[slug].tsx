@@ -11,6 +11,7 @@ import { allDocuments, allPosts, type Post } from 'contentlayer/generated'
 import { imageIdentifier } from 'lib/rehypeObsidianLinks'
 import MdxBody from 'components/MdxBody'
 import Seo from 'components/Seo'
+import { GROWTH_STAGE_ICONS } from 'lib/consts'
 
 
 
@@ -56,7 +57,7 @@ const PostTemplate: NextPageWithLayout = (props) => {
     <>
       <Seo
         title={post.title + ' | Frank Noirot'}
-        description={post.description}
+        description={'A ' + GROWTH_STAGE_ICONS[post.growthStage] + ` ${post.growthStage}-stage note: ` + post.description}
       />
       <article className="max-w-3xl py-8 mx-auto cl-post-body">
         <div className="mb-8">
