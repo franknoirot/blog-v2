@@ -1,13 +1,15 @@
-import Head from 'next/head'
-import { allProjects, Project } from 'contentlayer/generated'
+import { allDocuments, allProjects, Project } from 'contentlayer/generated'
 import { GetStaticProps } from 'next'
-import { parseObsidianLinks } from 'lib/markdown'
-import ReactMarkdown from 'react-markdown'
+import { obsidianLinksPostProcess } from 'lib/markdown'
 import { ReactElement } from 'react-markdown/lib/react-markdown'
 import BaseLayout from 'components/layouts/BaseLayout'
 import { NextPageWithLayout } from 'lib/utilityTypes'
 import { ParsedUrlQuery } from 'querystring'
 import Seo from 'components/Seo'
+import MdxBody from 'components/MdxBody'
+import { format, parseISO } from 'date-fns'
+import styles from './Project.module.css'
+import Head from 'next/head'
 
 export async function getStaticPaths() {
   const paths = allProjects.map((project) => project.url)
@@ -24,20 +26,20 @@ interface IParams extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps = async(context) => {
   const { slug } = context.params as IParams
   const project = allProjects.find((project) => project._raw.sourceFileName.includes(slug)) as Project
-  const projectBody = parseObsidianLinks(project.body.raw)
+
+  project.body.code = obsidianLinksPostProcess(project.body.code, allDocuments)
 
   return {
     props: {
       project,
-      projectBody,
     },
   }
 }
 
-interface IProjectProps { project: Project, projectBody: string }
+interface IProjectProps { project: Project }
 
 const ProjectTemplate: NextPageWithLayout = (props) => {
-  const { project, projectBody } = props as IProjectProps
+  const { project } = props as IProjectProps
   
   return (
     <>
@@ -45,23 +47,28 @@ const ProjectTemplate: NextPageWithLayout = (props) => {
         title={project.title + " | Frank Noirot"}
         description={`Built as part of work with ${project.organization}, where I served as ${project.role} and used ${project.tools}.`}
       />
-      <article className="max-w-2xl py-16 mx-auto">
-        <div className="mb-6 text-center">
-          <h1 className="mb-1 text-3xl font-bold">{project.title}</h1>
-          <p>for {project.organization}</p>
-          <p>my role was {project.role}</p>
-          <time dateTime={(project.created).toString()} className="block text-sm text-slate-600">
-            Started: {project.created}
-          </time>
-          <time dateTime={(project.updated).toString()} className="block text-sm text-slate-600">
-            Last Updated: {project.updated}
-          </time>
+      <article className={styles.wrapper}
+        style={{'--h': `${project.color?.h}deg`, '--s': `${project.color?.s}%`, '--l': `${project.color?.l}%`}}
+      >
+        <div className={styles.topArea}>
+          <figure className={styles.featuredImg}>
+            <img src={'/assets/' + project.image} alt="" />
+          </figure>
+          <div className={styles.infoWrapper}>
+            <h1 className={styles.heading}>{project.title}</h1>
+            <div className={styles.meta}>
+              <p className='col-span-2'>For <em>{ project.organization }</em> as a <em>{ project.role}</em></p>
+              <p className='col-span-2'><em>🛠 with</em> { project.tools }</p>
+              <p>
+                Started on <time dateTime={project.created}>{format(parseISO(project.created), 'LLLL d, yyyy')}</time>
+              </p>
+              <p>
+                Last update on <time dateTime={project.updated}>{format(parseISO(project.updated), 'LLLL d, yyyy')}</time>
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="cl-project-body">
-          <ReactMarkdown>
-            {projectBody}
-          </ReactMarkdown>
-        </div>
+        <MdxBody content={ project.body.code }/>
       </article>
     </>
   )

@@ -12,16 +12,16 @@ import HeadingWithSeeAll from 'components/HeadingWithSeeAll'
 import Seo from 'components/Seo'
 
 export async function getStaticProps() {
-  const byDescLastUpdated = (a: Post | Project, b: Post | Project) => {
+  const byDescLastUpdated = (a: Book | Post | Project, b: Book | Post | Project) => {
     return compareDesc(new Date(a.updated), new Date(b.updated))
   }
 
-  const posts = allPosts.sort(byDescLastUpdated)
+  const posts = allPosts.sort(byDescLastUpdated).slice(0,8)
     .map(({ url, title, growthStage, category, updated }) => ({ url, title, growthStage, category, updated }))
     
   const projects = allProjects.sort(byDescLastUpdated)
 
-  const books = allBooks.sort((a, b) => a.title > b.title ? 1 : -1)
+  const books = allBooks.sort(byDescLastUpdated).slice(0,8)
     .map(({ // send a subset of the book data to not overwhelm the page.
       title,
       author,
@@ -60,20 +60,20 @@ const Home: NextPageWithLayout = (props) => {
 
       <HeadingWithSeeAll href="/posts" totalEntries={posts.length}>Notes</HeadingWithSeeAll>
       <section className='posts-section featured'>
-        {posts.slice(0,9).map((post, idx) => (
+        {posts.map((post, idx) => (
           <PostCard key={idx} {...post} />
         ))}
       </section>
       <hr className='mt-8 mb-14' />
       <HeadingWithSeeAll href="/books" totalEntries={books.length}>Books</HeadingWithSeeAll>
         <section className='book-section featured'>
-          {books.slice(0,8).map((Book, idx) => (
+          {books.map((Book, idx) => (
             <BookCard key={idx} {...Book} />
           ))}
       </section>
       <hr className='mt-8 mb-14' />
       <HeadingWithSeeAll href="/projects" totalEntries={projects.length}>Projects</HeadingWithSeeAll>
-      <section className='project-section featured'>
+      <section className='projects-section featured'>
         {projects.map((project, idx) => (
           <ProjectCard key={'project-'+idx} {...project} />
         ))}

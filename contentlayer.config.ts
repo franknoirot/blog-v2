@@ -3,7 +3,7 @@ import remarkPrism from 'remark-prism'
 import remarkExternalLinks from 'remark-external-links'
 // import remarkObsidian from 'remark-obsidian'
 import rehypeObsidianLinks from './lib/rehypeObsidianLinks'
-import { defineDocumentType, makeSource } from 'contentlayer/source-files'
+import { defineDocumentType, defineNestedType, makeSource } from 'contentlayer/source-files'
 // import { parseObsidianLinks } from './lib/markdown'
 
 export const Post = defineDocumentType(() => ({
@@ -248,10 +248,34 @@ export const Page = defineDocumentType(() => ({
   },
 }))
 
+const HSL = defineNestedType(() => ({
+  name: 'HSL',
+  required: true,
+  description: 'HSL color that is the base of the theme for this project',
+  fields: {
+    h: {
+      type: 'number',
+      required: true,
+      description: 'Hue',
+    },
+    s: {
+      type: 'number',
+      required: true,
+      description: 'Saturation',
+    },
+    l: {
+      type: 'number',
+      required: true,
+      description: 'Lightness',
+    },
+  },
+}))
+
 
 export const Project = defineDocumentType(() => ({
   name: 'Project',
   filePathPattern: `projects/*.md*`,
+  contentType: 'mdx',
   fields: {
     title: {
       type: 'string',
@@ -283,6 +307,15 @@ export const Project = defineDocumentType(() => ({
       description: 'The tools used on the project. Currently has to be a string but should be a list.',
       required: true,
     },
+    image: {
+      type: 'string',
+      description: 'Filename of the image within the `/public/_assets/` directory where this image sits.',
+      required: true,
+    },
+    color: {
+      type: 'nested',
+      of: HSL,
+    }
   },
   computedFields: {
       url: {

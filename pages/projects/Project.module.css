@@ -1,0 +1,42 @@
+.wrapper {
+    --color-800: hsl(calc(var(--h) - 15deg), calc(var(--s) + 60%), calc(var(--l) * 0.15));
+    --color-700: hsl(calc(var(--h) - 15deg), calc(var(--s) + 30%), calc(var(--l) * 0.3));
+    --color-600: hsl(calc(var(--h) - 10deg), calc(var(--s) + 20%), calc(var(--l) * 0.7));
+    --color-base: hsl(var(--h), var(--s), var(--l));
+    --color-400: hsl(calc(var(--h) + 10deg), calc(var(--s) - 5%), calc(var(--l) + 10%));
+    --color-300: hsl(calc(var(--h) + 15deg), calc(var(--s) - 15%), calc(var(--l) + 20%));
+    --color-400-faded: hsla(calc(var(--h) + 10deg), calc(var(--s) - 5%), calc(var(--l) * 1.1), .25);
+
+    @apply max-w-5xl py-8 mx-auto;
+}
+
+.topArea {
+    @apply flex gap-6 items-center;
+    @apply pb-12 mb-12 border-b;
+    background: radial-gradient(circle at 50% 100%, var(--color-400-faded), transparent 80%);
+}
+
+.heading {
+    @apply mb-2 text-3xl leading-tight md:text-4xl lg:text-5xl first-letter:capitalize;
+}
+
+
+.meta {
+  @apply pl-4 border-l text-slate-600 grid md:grid-cols-2 gap-y-4 gap-x-2 my-6;
+}
+
+.meta p {
+    @apply my-0;
+}
+
+.meta em,
+.meta strong {
+    color: var(--color-700);
+    @apply not-italic;
+}
+
+.featuredImg {
+    @apply border-2 rounded-xl overflow-hidden row-span-2 max-w-sm;
+    border-color: var(--color-base);
+    box-shadow: -2px 2px 0px var(--color-base);
+}

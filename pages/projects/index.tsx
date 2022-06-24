@@ -36,7 +36,7 @@ const ProjectLanding: NextPageWithLayout = (props) => {
           keys: ['title', 'author']
         }}
       />
-      <section className="posts-section">
+      <section className="projects-section">
         {processedProjects.map((project, idx) => (
           <ProjectCard key={idx} {...project} />
         ))}

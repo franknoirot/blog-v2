@@ -1,0 +1,41 @@
+.cardWrapper {
+    @apply block p-4 text-lg;
+    @apply transition-colors border  rounded-lg;
+
+    --color-800: hsl(calc(var(--h) - 15deg), calc(var(--s) + 60%), calc(var(--l) - 65%));
+    --color-700: hsl(calc(var(--h) - 15deg), calc(var(--s) + 20%), calc(var(--l) - 45%));
+    --color-600: hsl(calc(var(--h) - 10deg), calc(var(--s) + 20%), calc(var(--l) - 25%));
+    --color-base: hsl(var(--h), var(--s), var(--l));
+    --color-400: hsl(calc(var(--h) + 10deg), calc(var(--s) - 10%), calc(var(--l) + 15%));
+    --color-300: hsl(calc(var(--h) + 15deg), calc(var(--s) - 5%), calc(var(--l) + 20));
+    background: var(--color-400);
+    border-color: var(--color-base);
+}
+
+.cardWrapper:hover {
+    box-shadow: -2px 2px 0px var(--color-700);
+}
+
+.heading {
+    @apply m-0;
+}
+
+.cardWrapper:hover .heading {
+    color: var(--color-800);
+}
+
+.meta p {
+    @apply text-sm text-stone-700;
+}
+
+.meta em,
+.meta strong {
+    @apply not-italic;
+    color: var(--color-700);
+}
+
+@media (max-width: 768px) {
+    .cardWrapper {
+        background: var(--color-300);
+    }
+}
