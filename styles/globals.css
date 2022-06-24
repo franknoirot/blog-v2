@@ -29,6 +29,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  @apply bg-neutral-50;
 }
 
 a {
@@ -193,8 +194,8 @@ h3 {
 }
 
 .badge {
-  @apply inline-grid w-8 h-6 p-1 mx-4;
-  @apply text-sm font-normal rounded-full place-items-center bg-amber-100 text-amber-700;
+  @apply inline-grid w-10 h-7 p-1 mx-4;
+  @apply text-sm font-normal rounded-full place-items-center bg-amber-100 text-amber-700 border border-amber-200;
 }
 
 .cta-arrow {
