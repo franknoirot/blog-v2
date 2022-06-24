@@ -8,10 +8,11 @@ import PostCard from 'components/PostCard'
 import ListingPageHeading from 'components/ListingPageHeading'
 import { useState } from 'react'
 
+
 export async function getStaticProps() {
   const posts = allPosts.sort((a, b) => {
     return compareDesc(new Date(a.updated), new Date(b.updated))
-  })
+  }).map(({ url, title, growthStage, category, updated }) => ({ url, title, growthStage, category, updated }))
 
   return { props: { posts } }
 }

@@ -10,6 +10,23 @@ import { useMemo, useState } from 'react'
 
 export async function getStaticProps() {
   const books = allBooks.sort((a, b) => a.title < b.title ? -1 : 1)
+    .map(({ // send a subset of the book data to not overwhelm the page.
+      title,
+      subtitle,
+      category,
+      author,
+      editor,
+      url,
+      coverImg,
+    }) => ({
+      title,
+      subtitle: subtitle || "",
+      category,
+      author: author || "",
+      editor: editor || "",
+      url,
+      coverImg,
+    }))
 
   return { props: { books } }
 }
