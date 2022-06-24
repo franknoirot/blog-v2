@@ -7,22 +7,22 @@
     --color-300: hsl(calc(var(--h) + 15deg), calc(var(--s) - 15%), calc(var(--l) + 20%));
     --color-400-faded: hsla(calc(var(--h) + 10deg), calc(var(--s) - 5%), calc(var(--l) * 1.1), .25);
 
-    @apply max-w-5xl py-8 mx-auto;
+    @apply max-w-5xl md:py-8 mx-auto;
 }
 
 .topArea {
-    @apply flex gap-6 items-center;
-    @apply pb-12 mb-12 border-b;
+    @apply flex flex-col md:flex-row gap-6 md:items-center;
+    @apply pb-6 md:pb-12 mb-8 md:mb-12 border-b;
     background: radial-gradient(circle at 50% 100%, var(--color-400-faded), transparent 80%);
 }
 
 .heading {
-    @apply mb-2 text-3xl leading-tight md:text-4xl lg:text-5xl first-letter:capitalize;
+    @apply mb-2 mt-4 md:mt-4 text-3xl leading-tight md:text-4xl lg:text-5xl first-letter:capitalize;
 }
 
 
 .meta {
-  @apply pl-4 border-l text-slate-600 grid md:grid-cols-2 gap-y-4 gap-x-2 my-6;
+  @apply pl-4 border-l text-slate-600 grid lg:grid-cols-2 gap-y-4 gap-x-2 my-4 md:my-6;
 }
 
 .meta p {

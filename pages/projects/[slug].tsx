@@ -57,8 +57,8 @@ const ProjectTemplate: NextPageWithLayout = (props) => {
           <div className={styles.infoWrapper}>
             <h1 className={styles.heading}>{project.title}</h1>
             <div className={styles.meta}>
-              <p className='col-span-2'>For <em>{ project.organization }</em> as a <em>{ project.role}</em></p>
-              <p className='col-span-2'><em>🛠 with</em> { project.tools }</p>
+              <p className='lg:col-span-2'>For <em>{ project.organization }</em> as a <em>{ project.role}</em></p>
+              <p className='lg:col-span-2'><em>🛠 with</em> { project.tools }</p>
               <p>
                 Started on <time dateTime={project.created}>{format(parseISO(project.created), 'LLLL d, yyyy')}</time>
               </p>
