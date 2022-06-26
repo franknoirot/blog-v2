@@ -53,32 +53,34 @@ interface IParseCodeBlockProps extends React.PropsWithChildren {
 }
 
 export function obsidianLinksPostProcess(text: string, allDocuments: DocumentTypes[]) {
-    const replaceUrlRegex = new RegExp(linkUrlIdentifier+"/([\\w-]+)(?=\")", 'g')
+    const replaceUrlRegex = new RegExp(linkUrlIdentifier+"\/([\\s\\w-%]+)(?=\")", 'g')
 
     text = text.replaceAll(imageIdentifier, '/assets/') || ''
   
-  if (replaceUrlRegex.test(text)) {
-    const allSlugs = [] as string[];
-    const allLinkedDocs = [] as DocumentTypesNoNowUpdates[];
+    if (replaceUrlRegex.test(text)) {
+        const allSlugs = [] as string[];
+        const allLinkedDocs = [] as DocumentTypesNoNowUpdates[];
 
-    text = text.replace(replaceUrlRegex, (_: string, p1: string) => {
-        const foundDoc = allDocuments.find(doc => doc._raw.sourceFileName.includes(p1)) as (DocumentTypesNoNowUpdates | undefined)
-        
-        // if the link is to a private or non-existing document nullify it   
-        // I used CSS selector a[href$="#"] to cancel pointer-events on empty links!
-        if (!foundDoc) return '#'
+        text = text.replace(replaceUrlRegex, (_: string, p1: string) => {
+            const foundDoc = allDocuments.find(doc => doc._raw.sourceFileName.includes(p1)) as (DocumentTypesNoNowUpdates | undefined)
 
-        allSlugs.push(p1)
-        allLinkedDocs.push(foundDoc)
+            console.log({ p1, doc: foundDoc?.title })
+            
+            // if the link is to a private or non-existing document nullify it   
+            // I used CSS selector a[href$="#"] to cancel pointer-events on empty links!
+            if (!foundDoc) return '#'
 
-        return foundDoc.url
-    })
+            allSlugs.push(p1)
+            allLinkedDocs.push(foundDoc)
 
-    const replaceLabelRegex = new RegExp(linkTextIdentifier+"([\\w-\\s]+)"+linkTextIdentifier, 'g')
-    text = text.replace(replaceLabelRegex, (_: string, p1: string) => {
-      return allLinkedDocs.find(doc => doc._raw.sourceFileName.includes(p1))?.title || p1
-    })
-  }
+            return foundDoc.url
+        })
 
-  return text
+        const replaceLabelRegex = new RegExp(linkTextIdentifier+"([\\w-\\s]+)"+linkTextIdentifier, 'g')
+        text = text.replace(replaceLabelRegex, (_: string, p1: string) => {
+            return allLinkedDocs.find(doc => doc._raw.sourceFileName.includes(p1))?.title || p1
+        })
+    }
+
+    return text
 }
