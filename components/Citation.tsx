@@ -1,5 +1,6 @@
 interface ICitation {
     author?: string, // Author's name
+    editor?: string, // Editor's name
     title: string,// Full title of each publication (from the title page, not the front cover)
     subtitle?: string,
     publisher?: string, // Publisher
@@ -16,6 +17,7 @@ interface ICitation {
 export default function Citation(props: React.PropsWithoutRef<ICitation>) {
     const {
         author,
+        editor,
         title,
         subtitle,
         publisher,
@@ -28,12 +30,14 @@ export default function Citation(props: React.PropsWithoutRef<ICitation>) {
         subworkTitle
     } = props
 
-    const maybeSwappedName = (author && !author?.includes(','))
-        ? author?.slice(author?.lastIndexOf(' ')) + ', ' + author.slice(0, author.lastIndexOf(' '))
-        : author
+    const authorOrEd = author || editor
+
+    const maybeSwappedName = (authorOrEd && ![',', ' and ', ' & ', ' + '].some(joiner => authorOrEd.includes(joiner)))
+        ? authorOrEd?.slice(authorOrEd?.lastIndexOf(' ')) + ', ' + authorOrEd.slice(0, authorOrEd.lastIndexOf(' '))
+        : authorOrEd
 
     return (<p>
-        {maybeSwappedName ? maybeSwappedName+'. ' : 'Author Unknown. '}
+        {maybeSwappedName ? (maybeSwappedName+ (!author && editor ? ', editor. ' : '. ')) : 'Author Unknown. '}
         {subworkTitle ? `"${subworkTitle}." ` : ''}
         <em>{title}{subtitle ? ': ' + subtitle : ''}. </em>
         {edition ? ` ${edition}. `: ''}

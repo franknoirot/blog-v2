@@ -1,18 +1,19 @@
 import Head from 'next/head'
 import { allBooks, Book } from 'contentlayer/generated'
 import { GetStaticProps } from 'next'
-import { parseObsidianLinks } from 'lib/markdown'
+import { getBacklinks, parseObsidianLinks } from 'lib/markdown'
 import ReactMarkdown from 'react-markdown'
 import Image from 'next/image'
 import { ParsedUrlQuery } from 'querystring'
 import { ReactElement } from 'react-markdown/lib/react-markdown'
 import BaseLayout from 'components/layouts/BaseLayout'
-import { NextPageWithLayout } from 'lib/utilityTypes'
+import { Backlink, NextPageWithLayout } from 'lib/utilityTypes'
 import extractColors from 'extract-colors'
 import { useContext, useEffect } from 'react'
 import BookLayout, { BookContext } from 'components/layouts/BookLayout'
 import Seo from 'components/Seo'
 import Citation from 'components/Citation'
+import Link from 'next/link'
 
 export async function getStaticPaths() {
   const paths = allBooks.map((book) => book.url)
@@ -29,12 +30,16 @@ interface IParams extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps = async(context) => {
   const { slug } = context.params as IParams
   const book = allBooks.find((book) => book._raw.sourceFileName.includes(slug)) as Book
+
+  const backlinks = getBacklinks(slug)
+
   const bookBody = parseObsidianLinks(book.body.raw)
 
   return {
     props: {
       book,
       bookBody,
+      backlinks,
     },
   }
 }
@@ -48,10 +53,10 @@ export type ExtractedColor = {
   saturation: number,
 }
 
-interface IBookProps { book: Book, bookBody: string }
+interface IBookProps { book: Book, bookBody: string, backlinks: Backlink[] }
 
 const BookTemplate: NextPageWithLayout = (props) => {
-  const { book, bookBody } = props as IBookProps
+  const { book, bookBody, backlinks } = props as IBookProps
   const { setValue } = useContext(BookContext)
 
   function luminance(color: ExtractedColor ) {
@@ -132,6 +137,17 @@ const BookTemplate: NextPageWithLayout = (props) => {
           </ReactMarkdown>
           <h2>Citation</h2>
           <Citation {...book} />
+          {backlinks.length > 0 && (<>
+          <h2>Other content that links to this</h2>
+          <ul>
+            {backlinks.map(backlink => (
+              <li key={backlink.url}>
+                <Link href={backlink.url}><a>
+                  <strong>{ backlink.type.replace("Post", "Note") }: </strong>{ backlink.title }
+                </a></Link>
+              </li>
+            ))}
+          </ul></>)}
         </div>
       </article>
     </>

@@ -1,9 +1,11 @@
 import { Post } from "contentlayer/generated";
-import { format, parseISO } from 'date-fns'
+import { format, parse, parseISO } from 'date-fns'
 import Link from "next/link";
 import styles from './PostCard.module.css'
 
 export default function PostCard(post: Post, headingLevel = 3) {
+    const realDate = new Date(post.updated)
+    realDate.setDate(realDate.getDate() + 1)
 
     return (
     <Link href={post.url}><a className={styles.cardWrapper + ' group'}>
@@ -12,7 +14,7 @@ export default function PostCard(post: Post, headingLevel = 3) {
         <p className="text-sm">
             <span className={styles.growthStage + " stage-before " + post.growthStage}>{ post.growthStage }</span>
             <time dateTime={post.updated} className="text-xs text-slate-600">
-            Last tended {format(parseISO(post.updated), 'LLLL d, yyyy')}
+            Last tended { format(realDate, 'LLLL d, yyyy')}
             </time>
         </p>
       </div>

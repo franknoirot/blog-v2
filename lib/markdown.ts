@@ -84,3 +84,8 @@ export function obsidianLinksPostProcess(text: string, allDocuments: DocumentTyp
 
     return text
 }
+
+export function getBacklinks(slug: string) {
+    const backlinkingDocs = allDocuments.filter(doc => doc.type !== "NowUpdate" && doc.body.raw.includes('[['+slug)) as DocumentTypesNoNowUpdates[]
+    return backlinkingDocs.map(doc => ({ title: doc.title, url: doc.url, type: doc.type }))
+}

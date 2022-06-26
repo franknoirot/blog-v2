@@ -16,7 +16,7 @@ export default function BookCard(book: Book) {
           />
         </figure>
         <h2 className={styles.heading}>{book.title}</h2>
-        <p className="text-sm">{(book.editor) ? "edited " : ""}by { book.author || book.editor || "unknown" }</p>
+        <p className="text-sm">{(book.editor && !book.author) ? "edited " : ""}by { book.author || book.editor || "unknown" }</p>
       </div>
     </a></Link>
     )

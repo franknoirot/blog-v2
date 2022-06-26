@@ -5,3 +5,10 @@
     @apply grid md:grid-rows-2 items-center gap-x-4 gap-y-2;
     @apply md:border md:rounded-lg md:border-amber-100 bg-amber-50;
 }
+
+@media only screen and (orientation: landscape)
+                   and (max-height: 480px) {
+    .nav {
+        @apply static;
+    }
+}

@@ -1,17 +1,19 @@
 import Head from 'next/head'
 import { format, parseISO } from 'date-fns'
 import { GetStaticProps } from 'next'
-import { obsidianLinksPostProcess } from 'lib/markdown'
+import { DocumentTypesNoNowUpdates, getBacklinks, obsidianLinksPostProcess } from 'lib/markdown'
 import { ParsedUrlQuery } from 'querystring'
 import { ReactElement } from 'react-markdown/lib/react-markdown'
 import BaseLayout from 'components/layouts/BaseLayout'
-import { NextPageWithLayout } from 'lib/utilityTypes'
+import { Backlink, NextPageWithLayout } from 'lib/utilityTypes'
 import PostCorner from 'components/PostCorner'
 import { allDocuments, allPosts, type Post } from 'contentlayer/generated'
 import { imageIdentifier } from 'lib/rehypeObsidianLinks'
 import MdxBody from 'components/MdxBody'
 import Seo from 'components/Seo'
 import { GROWTH_STAGE_ICONS } from 'lib/consts'
+import Link from 'next/link'
+import { adjustDate } from 'lib/time'
 
 
 
@@ -33,16 +35,21 @@ export const getStaticProps: GetStaticProps = (context) => {
   const { slug } = context.params as IParams
   const post = allPosts.find((post) => post._raw.sourceFileName.includes(slug)) as PostMdOrMdx
 
+  const backlinks = getBacklinks(slug)
+
   post.body.code = obsidianLinksPostProcess(post.body.code, allDocuments)
 
   return {
     props: {
       post,
+      backlinks,
     },
   }
 }
 
-interface IPostParams { post: PostMdOrMdx }
+
+
+interface IPostParams { post: PostMdOrMdx, backlinks: Backlink[] }
 
 interface ICodeComponentParams extends React.PropsWithChildren {
   node: any,
@@ -51,7 +58,7 @@ interface ICodeComponentParams extends React.PropsWithChildren {
 }
 
 const PostTemplate: NextPageWithLayout = (props) => {
-  const { post } = props as IPostParams;
+  const { post, backlinks } = props as IPostParams;
     
   return (
     <>
@@ -67,14 +74,25 @@ const PostTemplate: NextPageWithLayout = (props) => {
               Growth Stage: <span className={"text-green-700 capitalize " + post.growthStage}>{ post.growthStage }</span>
             </p>
             <p>
-              Created on <time dateTime={post.created}>{format(parseISO(post.created), 'LLLL d, yyyy')}</time>
+              Created on <time dateTime={post.created}>{format(adjustDate(post.created), 'LLLL d, yyyy')}</time>
             </p>
             <p>
-              Last tended <time dateTime={post.updated}>{format(parseISO(post.updated), 'LLLL d, yyyy')}</time>
+              Last tended <time dateTime={post.updated}>{format(adjustDate(post.updated), 'LLLL d, yyyy')}</time>
             </p>
           </div>
         </div>
         <MdxBody content={ post.body.code }/>
+        {backlinks.length > 0 && (<>
+        <h2>Other content that links to this</h2>
+        <ul>
+          {backlinks.map(backlink => (
+            <li key={backlink.url}>
+              <Link href={backlink.url}><a>
+                <strong>{ backlink.type.replace("Post", "Note") }: </strong>{ backlink.title }
+              </a></Link>
+            </li>
+          ))}
+        </ul></>)}
       </article>
     </>
   )

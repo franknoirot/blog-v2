@@ -1,15 +1,17 @@
 import { allDocuments, allProjects, Project } from 'contentlayer/generated'
 import { GetStaticProps } from 'next'
-import { obsidianLinksPostProcess } from 'lib/markdown'
+import { getBacklinks, obsidianLinksPostProcess } from 'lib/markdown'
 import { ReactElement } from 'react-markdown/lib/react-markdown'
 import BaseLayout from 'components/layouts/BaseLayout'
-import { NextPageWithLayout } from 'lib/utilityTypes'
+import { Backlink, NextPageWithLayout } from 'lib/utilityTypes'
 import { ParsedUrlQuery } from 'querystring'
 import Seo from 'components/Seo'
 import MdxBody from 'components/MdxBody'
 import { format, parseISO } from 'date-fns'
 import styles from './Project.module.css'
 import Head from 'next/head'
+import Link from 'next/link'
+import { adjustDate } from 'lib/time'
 
 export async function getStaticPaths() {
   const paths = allProjects.map((project) => project.url)
@@ -27,19 +29,22 @@ export const getStaticProps: GetStaticProps = async(context) => {
   const { slug } = context.params as IParams
   const project = allProjects.find((project) => project._raw.sourceFileName.includes(slug)) as Project
 
+  const backlinks = getBacklinks(slug)
+
   project.body.code = obsidianLinksPostProcess(project.body.code, allDocuments)
 
   return {
     props: {
       project,
+      backlinks
     },
   }
 }
 
-interface IProjectProps { project: Project }
+interface IProjectProps { project: Project, backlinks: Backlink[] }
 
 const ProjectTemplate: NextPageWithLayout = (props) => {
-  const { project } = props as IProjectProps
+  const { project, backlinks } = props as IProjectProps
   
   return (
     <>
@@ -60,10 +65,10 @@ const ProjectTemplate: NextPageWithLayout = (props) => {
               <p className='lg:col-span-2'>For <em>{ project.organization }</em> as a <em>{ project.role}</em></p>
               <p className='lg:col-span-2'><em>🛠 with</em> { project.tools }</p>
               <p>
-                Started on <time dateTime={project.created}>{format(parseISO(project.created), 'LLLL d, yyyy')}</time>
+                Started on <time dateTime={project.created}>{format(adjustDate(project.created), 'LLLL d, yyyy')}</time>
               </p>
               <p>
-                Last update on <time dateTime={project.updated}>{format(parseISO(project.updated), 'LLLL d, yyyy')}</time>
+                Last update on <time dateTime={project.updated}>{format(adjustDate(project.updated), 'LLLL d, yyyy')}</time>
               </p>
             </div>
           </div>
@@ -71,6 +76,17 @@ const ProjectTemplate: NextPageWithLayout = (props) => {
         <div className={styles.bodyWrapper}>
           <MdxBody content={ project.body.code }/>
         </div>
+        {backlinks.length > 0 && (<>
+          <h2>Other content that links to this</h2>
+          <ul>
+            {backlinks.map(backlink => (
+              <li key={backlink.url}>
+                <Link href={backlink.url}><a>
+                  <strong>{ backlink.type.replace("Post", "Note") }: </strong>{ backlink.title }
+                </a></Link>
+              </li>
+            ))}
+          </ul></>)}
       </article>
     </>
   )
