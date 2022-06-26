@@ -12,7 +12,8 @@ export default function BookCard(book: Book) {
             src={'/assets/'+book.coverImg}
             className={styles.cover}
             alt={book.title}
-            width={180} height={240}objectFit="contain"
+            width={180} height={240} objectFit="contain"
+            loading="lazy"
           />
         </figure>
         <h2 className={styles.heading}>{book.title}</h2>
