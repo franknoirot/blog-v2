@@ -12,7 +12,7 @@ export function parseObsidianLinks(content: string, isMarkdown: boolean = true):
         const slug = p1.includes("|") ? p1.slice(0, p1.indexOf("|")) : p1
         
         const filteredDocs = allDocuments.filter(doc => !['NowUpdate'].includes(doc.type)) as DocumentTypesNoNowUpdates[]
-        const doc = filteredDocs.find((doc: DocumentTypesNoNowUpdates) => doc.url.includes(slug)) as DocumentTypesNoNowUpdates;
+        const doc = filteredDocs.find((doc: DocumentTypesNoNowUpdates) => doc.url.includes('/'+slug)) as DocumentTypesNoNowUpdates;
 
         const linkText = (p2) ? p2.slice(1) : (doc?.title || p1)
         
@@ -62,9 +62,8 @@ export function obsidianLinksPostProcess(text: string, allDocuments: DocumentTyp
         const allLinkedDocs = [] as DocumentTypesNoNowUpdates[];
 
         text = text.replace(replaceUrlRegex, (_: string, p1: string) => {
-            const foundDoc = allDocuments.find(doc => doc._raw.sourceFileName.includes(p1)) as (DocumentTypesNoNowUpdates | undefined)
-
-            console.log({ p1, doc: foundDoc?.title })
+            const allDocsNoNowUpdates = allDocuments.filter(doc => doc.type !== 'NowUpdate') as DocumentTypesNoNowUpdates[]
+            const foundDoc = allDocsNoNowUpdates.find((doc) => doc.url.includes('/' + p1)) as (DocumentTypesNoNowUpdates | undefined)
             
             // if the link is to a private or non-existing document nullify it   
             // I used CSS selector a[href$="#"] to cancel pointer-events on empty links!
