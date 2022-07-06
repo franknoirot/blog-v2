@@ -1,6 +1,6 @@
 import { allDocuments, Book, DocumentTypes, Page, Post, Project } from "contentlayer/generated";
 import React from "react";
-import { imageIdentifier, linkTextIdentifier, linkUrlIdentifier } from "./rehypeObsidianLinks";
+import { imageIdentifier, linkTextIdentifier, linkUrlIdentifier } from "./remarkObsidianLinks";
 
 export type DocumentTypesNoNowUpdates = Book | Page | Post | Project
 

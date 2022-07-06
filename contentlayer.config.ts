@@ -2,7 +2,7 @@ import remarkFootnotes from 'remark-footnotes'
 import remarkPrism from 'remark-prism'
 import remarkExternalLinks from 'remark-external-links'
 // import remarkObsidian from 'remark-obsidian'
-import rehypeObsidianLinks from './lib/rehypeObsidianLinks'
+import remarkObsidianLinks from './lib/remarkObsidianLinks'
 import { defineDocumentType, defineNestedType, makeSource } from 'contentlayer/source-files'
 // import { parseObsidianLinks } from './lib/markdown'
 
@@ -346,7 +346,7 @@ export default makeSource({
         remarkFootnotes,
         [remarkPrism, { transformInlineCode: true }],
         remarkExternalLinks,
-        rehypeObsidianLinks
+        remarkObsidianLinks
       ],
     },
 })
