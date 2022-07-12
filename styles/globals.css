@@ -89,6 +89,17 @@ h3 {
   @apply list-decimal pl-6;
 }
 
+.cl-book-body ol ol,
+.cl-post-body ol ol,
+.cl-book-body ul ol,
+.cl-post-body ul ol,
+.cl-book-body ol ul,
+.cl-post-body ol ul,
+.cl-book-body ul ul,
+.cl-post-body ul ul {
+  @apply my-0;
+}
+
 .cl-book-body ol li::marker,
 .cl-post-body ol li::marker {
   font-family: 'Atkinson Hyperlegible';
