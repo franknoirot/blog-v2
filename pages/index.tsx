@@ -90,8 +90,8 @@ const Home: NextPageWithLayout = (props) => {
       <hr className='mt-8 mb-14' />
       <HeadingWithSeeAll href="/books" totalEntries={totals.books}>Books</HeadingWithSeeAll>
         <section className='book-section featured'>
-          {books.map((Book, idx) => (
-            <BookCard key={idx} {...Book} />
+          {books.map((book, idx) => (
+            <BookCard key={idx} {...book} />
           ))}
       </section>
       <hr className='mt-8 mb-14' />
