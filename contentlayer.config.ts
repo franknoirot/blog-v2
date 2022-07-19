@@ -55,6 +55,7 @@ export const Post = defineDocumentType(() => ({
 export const Book = defineDocumentType(() => ({
     name: 'Book',
     filePathPattern: `books/**/*.md*`,
+    contentType: 'mdx',
     fields: {
         title: {
             type: 'string',

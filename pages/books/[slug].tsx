@@ -1,8 +1,7 @@
 import Head from 'next/head'
-import { allBooks, Book } from 'contentlayer/generated'
+import { allBooks, allDocuments, Book } from 'contentlayer/generated'
 import { GetStaticProps } from 'next'
-import { getBacklinks, parseObsidianLinks } from 'lib/markdown'
-import ReactMarkdown from 'react-markdown'
+import { getBacklinks, obsidianLinksPostProcess } from 'lib/markdown'
 import Image from 'next/image'
 import { ParsedUrlQuery } from 'querystring'
 import { ReactElement } from 'react-markdown/lib/react-markdown'
@@ -14,6 +13,7 @@ import BookLayout, { BookContext } from 'components/layouts/BookLayout'
 import Seo from 'components/Seo'
 import Citation from 'components/Citation'
 import Link from 'next/link'
+import MdxBody from 'components/MdxBody'
 
 export async function getStaticPaths() {
   const paths = allBooks.map((book) => book.url)
@@ -33,12 +33,11 @@ export const getStaticProps: GetStaticProps = async(context) => {
 
   const backlinks = getBacklinks(slug)
 
-  const bookBody = parseObsidianLinks(book.body.raw)
+  book.body.code = obsidianLinksPostProcess(book.body.code, allDocuments)
 
   return {
     props: {
       book,
-      bookBody,
       backlinks,
     },
   }
@@ -53,10 +52,10 @@ export type ExtractedColor = {
   saturation: number,
 }
 
-interface IBookProps { book: Book, bookBody: string, backlinks: Backlink[] }
+interface IBookProps { book: Book, backlinks: Backlink[] }
 
 const BookTemplate: NextPageWithLayout = (props) => {
-  const { book, bookBody, backlinks } = props as IBookProps
+  const { book, backlinks } = props as IBookProps
   const { setValue } = useContext(BookContext)
 
   function luminance(color: ExtractedColor ) {
@@ -132,9 +131,7 @@ const BookTemplate: NextPageWithLayout = (props) => {
           </div>
         </section>
         <div className="max-w-4xl mx-auto cl-book-body">
-          <ReactMarkdown>
-            {bookBody}
-          </ReactMarkdown>
+        <MdxBody content={ book.body.code }/>
           <h2>Citation</h2>
           <Citation {...book} />
           {backlinks.length > 0 && (<>
