@@ -40,34 +40,34 @@ function RSVPForm() {
                 Cannot Attend
             </label>
         </fieldset>
-        <fieldset name="diet">
+        <fieldset>
             <legend>Diet Preferences (select as many as apply)</legend>
             <label>
-                <input type="checkbox" value="Vegetarian" />
+                <input name="Vegeterian" type="checkbox" value="Vegetarian" />
                 Vegetarian
             </label>
             <label>
-                <input type="checkbox" value="Vegan" />
+                <input name="Vegan" type="checkbox" value="Vegan" />
                 Vegan
             </label>
             <label>
-                <input type="checkbox" value="Kosher" />
+                <input name="Kosher" type="checkbox" value="Kosher" />
                 Kosher
             </label>
             <label>
-                <input type="checkbox" value="Non-alcoholic" />
+                <input name="Non-alcoholic" type="checkbox" value="Non-alcoholic" />
                 Non-alcoholic
             </label>
             <label>
-                <input type="checkbox" value="Gluten-Free" />
+                <input name="Gluten-Free" type="checkbox" value="Gluten-Free" />
                 Gluten-Free
             </label>
             <label>
-                <input type="checkbox" value="No Peanuts" />
+                <input name="No Peanuts" type="checkbox" value="No Peanuts" />
                 No Peanuts
             </label>
             <label>
-                <input type="checkbox" value="No Tree Nuts" />
+                <input name="No Tree Nuts" type="checkbox" value="No Tree Nuts" />
                 No Tree Nuts
             </label>
             <label>
