@@ -6,7 +6,7 @@ interface ISeoProps {
     title: string,
     description: string,
     image?: string,
-    hidden: boolean,
+    hidden?: boolean,
 }
 
 export default function Seo({ title, description, image, hidden }: ISeoProps) {

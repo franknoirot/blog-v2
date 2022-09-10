@@ -18,22 +18,22 @@ export default function BirthdayRSVP() {
             Email
             <input name="email" type="email" />
         </label>
-        <fieldset name="attendance">
+        <fieldset>
             <legend>Attendance</legend>
             <label>
-                <input type="radio" value="Brunch + Met visit" />
+                <input name="attendance" type="radio" value="Brunch + Met visit" />
                 Brunch + Met Visit
             </label>
             <label>
-                <input type="radio" value="Brunch Only" defaultChecked />
+                <input name="attendance" type="radio" value="Brunch Only" defaultChecked />
                 Brunch Only
             </label>
             <label>
-                <input type="radio" value="Met Only" />
+                <input name="attendance" type="radio" value="Met Only" />
                 Met Only
             </label>
             <label>
-                <input type="radio" value="Cannot Attend" />
+                <input name="attendance" type="radio" value="Cannot Attend" />
                 Cannot Attend
             </label>
         </fieldset>
@@ -74,7 +74,7 @@ export default function BirthdayRSVP() {
         </fieldset>
         <label>
             <input type="checkbox" name="soul-pledge" />
-            I agree to the terms & conditions; will share my personal data, baby photos, and darkest secrets; and would like to be put on the email list for Frank's new podcast on the history of chair design. Just kidding this checkbox does nothing.
+            I agree to the terms & conditions; will share my personal data, baby photos, and darkest secrets; and would like to be put on the email list for Frank&apos;s new podcast on the history of chair design. Just kidding this checkbox does nothing.
         </label>
         <button type="submit">Submit</button>
     </form>
