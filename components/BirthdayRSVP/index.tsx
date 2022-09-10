@@ -1,15 +1,18 @@
 import styles from './BirthdayRSVP.module.css'
 import { useRouter } from 'next/router'
 
-export default function BirthdayRSVP() {
+function RSVPForm() {
     const { asPath } = useRouter()
+
     return <form
-        className={styles.form}
-        name="birthday-rsvp"
-        action={asPath + "/success"}
-        method="POST"
-        data-netlify="true">
-        <input type="hidden" name="form-name" value="bir" />
+    className={styles.form}
+    name="birthday-rsvp"
+    action={asPath + "/?success=true"}
+    method="POST"
+    data-netlify="true"
+    data-netlify-honeypot="bot-field"
+    >
+        <input type="hidden" name="form-name" value="birthday-rsvp" />
         <label>
             Name (required)
             <input name="name" type="text" required />
@@ -76,6 +79,27 @@ export default function BirthdayRSVP() {
             <input type="checkbox" name="soul-pledge" />
             I agree to the terms & conditions; will share my personal data, baby photos, and darkest secrets; and would like to be put on the email list for Frank&apos;s new podcast on the history of chair design. Just kidding this checkbox does nothing.
         </label>
+        <p hidden>
+            <label>
+                Don&apos;t fill this out: <input name="bot-field" />
+            </label>
+        </p>
         <button type="submit">Submit</button>
     </form>
+}
+
+function RSVPConfirmation() {
+    return <>
+        <h3>Thanks for RSVPing 🎉</h3>
+        <p>If you&apos;re able to make it I&apos;m looking forward to seeing you on the 17th, if not I&apos;m looking forward to seeing you when I see you 😊.</p>
+    </>
+}
+
+export default function BirthdayRSVP() {
+    const router = useRouter()
+    const confirmationScreenVisible = router.query?.success && router.query.success === "true";
+
+    const formVisible = !confirmationScreenVisible
+
+    return formVisible ? <RSVPForm/> : <RSVPConfirmation/>
 }
