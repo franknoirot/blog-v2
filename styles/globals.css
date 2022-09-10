@@ -245,6 +245,23 @@ h3 {
   @apply mb-4 md:mb-8 text-4xl md:text-6xl;
 }
 
+.page p {
+  @apply mb-6;
+}
+
+.page ul,
+.page ol {
+  @apply list-inside mb-6;
+}
+
+.page ul {
+  @apply list-disc;
+}
+
+.page ol {
+  @apply list-decimal;
+}
+
 /**
  * VS theme by Andrew Lock (https://andrewlock.net)
  * Inspired by Visual Studio syntax coloring

@@ -240,6 +240,12 @@ export const Page = defineDocumentType(() => ({
           description: 'Meta description of the page.',
           required: true,
       },
+      hidden: {
+        type: 'boolean',
+        description: 'Should this page be prevented from being indexed by search engines?',
+        default: false,
+        required: false,
+    },
   },
   computedFields: {
       url: {

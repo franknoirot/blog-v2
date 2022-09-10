@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BirthdayRSVP from 'components/BirthdayRSVP'
 import Callout from 'components/Callout'
 import React from "react";
 import { useMDXComponent } from "next-contentlayer/hooks";
@@ -17,11 +18,13 @@ export default function MdxBody({ content }: { content: string }) {
 
     return (
         <MdxComponent components={{
+            BirthdayRSVP,
             Callout,
             a: ({ href, children, ...rest }: ILinkProps) => <Link href={href}><a {...rest}>{ children }</a></Link>,
             img: ({ src, alt, ...rest }: React.PropsWithoutRef<IImgProps>) => (
                 <img src={((!src.startsWith('http') && !src.startsWith('/assets')) ? '/assets/' : '') + src} className="my-8" {...rest}  alt={alt} />
-            )
+            ),
+            
           }}>
             {content}
         </MdxComponent>

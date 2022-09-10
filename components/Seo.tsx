@@ -6,9 +6,10 @@ interface ISeoProps {
     title: string,
     description: string,
     image?: string,
+    hidden: boolean,
 }
 
-export default function Seo({ title, description, image }: ISeoProps) {
+export default function Seo({ title, description, image, hidden }: ISeoProps) {
     const router = useRouter()
 
     return (
@@ -31,6 +32,8 @@ export default function Seo({ title, description, image }: ISeoProps) {
             <meta property="twitter:title" content={ title }/>
             <meta property="twitter:description" content={ description }/>
             { image && <meta property="twitter:image" content={ SITE_ORIGIN + image }/> }
+
+            { hidden && <meta name="robots" content="noindex nofollow" /> }
         </Head>
     )
 }

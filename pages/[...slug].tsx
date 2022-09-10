@@ -37,7 +37,9 @@ export const getStaticProps: GetStaticProps = (context) => {
   }
 }
 
-interface IPageParams { page: PageMdOrMdx, pageBody: string }
+interface IPageParams {
+  page: PageMdOrMdx
+}
 
 const PageTemplate: NextPageWithLayout = (props) => {
   const { page } = props as IPageParams
@@ -47,6 +49,7 @@ const PageTemplate: NextPageWithLayout = (props) => {
       <Seo
         title={page.title + " | Frank Noirot"}
         description={page.description}
+        hidden={page.hidden}
       />
       <article className="max-w-3xl mx-auto md:py-8 page">
         <MdxBody content={ page.body.code }/>
