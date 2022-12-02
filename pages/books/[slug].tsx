@@ -14,6 +14,7 @@ import Seo from 'components/Seo'
 import Citation from 'components/Citation'
 import Link from 'next/link'
 import MdxBody from 'components/MdxBody'
+import styles from './BookTemplate.module.css'
 
 export async function getStaticPaths() {
   const paths = allBooks.map((book) => book.url)
@@ -92,13 +93,14 @@ const BookTemplate: NextPageWithLayout = (props) => {
       <article className="max-w-6xl mx-auto md:py-8 lg:py-16">
         <section className="grid items-center grid-cols-2 mb-10 border-b md:pb-12 md:grid-cols-5">
           <div className='col-span-2 cl-book-cover'>
-            <div className='block mx-auto overflow-visible skew-y-3 w-fit' style={{background: 'radial-gradient(closest-side at 50% 99%, hsla(220deg, 20%, 4%, .2) 30%, transparent)'}}>
+            <div className={styles.hero}>
               <Image src={'/assets/' + book.coverImg}
                 width="350"
                 height="350"
                 layout='intrinsic'
                 objectFit='contain'
                 alt={book.title + ' cover'}
+                priority
               />
             </div>
           </div>

@@ -43,31 +43,31 @@ function RSVPForm() {
         <fieldset>
             <legend>Diet Preferences (select as many as apply)</legend>
             <label>
-                <input name="Vegeterian" type="checkbox" value="Vegetarian" />
+                <input name="diet" type="checkbox" value="Vegetarian" />
                 Vegetarian
             </label>
             <label>
-                <input name="Vegan" type="checkbox" value="Vegan" />
+                <input name="diet" type="checkbox" value="Vegan" />
                 Vegan
             </label>
             <label>
-                <input name="Kosher" type="checkbox" value="Kosher" />
+                <input name="diet" type="checkbox" value="Kosher" />
                 Kosher
             </label>
             <label>
-                <input name="Non-alcoholic" type="checkbox" value="Non-alcoholic" />
+                <input name="diet" type="checkbox" value="Non-alcoholic" />
                 Non-alcoholic
             </label>
             <label>
-                <input name="Gluten-Free" type="checkbox" value="Gluten-Free" />
+                <input name="diet" type="checkbox" value="Gluten-Free" />
                 Gluten-Free
             </label>
             <label>
-                <input name="No Peanuts" type="checkbox" value="No Peanuts" />
+                <input name="diet" type="checkbox" value="No Peanuts" />
                 No Peanuts
             </label>
             <label>
-                <input name="No Tree Nuts" type="checkbox" value="No Tree Nuts" />
+                <input name="diet" type="checkbox" value="No Tree Nuts" />
                 No Tree Nuts
             </label>
             <label>

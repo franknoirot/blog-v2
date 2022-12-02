@@ -1,0 +1,4 @@
+.hero {
+    @apply block mx-auto overflow-visible skew-y-3 w-fit;
+    background: radial-gradient(closest-side at 50% 99%, hsla(220deg, 20%, 4%, .2) 30%, transparent);
+}
