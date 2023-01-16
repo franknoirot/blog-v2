@@ -25,7 +25,7 @@ const PostLanding: NextPageWithLayout = (props) => {
   const [processedPosts, updatePosts] = useState(posts)
   
   return (
-    <div className="max-w-6xl mx-auto md:py-8 lg:py-16to">
+    <div className="max-w-6xl mx-auto md:py-8 lg:py-16">
       <Seo
         title={`Frank Noirot: All Notes`}
         description={`My digital garden of writing on software development and UX design, with occasional thoughts on urban planning, ecological design, and skateboarding.`}

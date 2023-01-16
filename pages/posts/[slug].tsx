@@ -66,7 +66,7 @@ const PostTemplate: NextPageWithLayout = (props) => {
         title={post.title + ' | Frank Noirot'}
         description={'A ' + GROWTH_STAGE_ICONS[post.growthStage] + ` ${post.growthStage}-stage note: ` + post.description}
       />
-      <article className="max-w-3xl py-8 mx-auto cl-post-body">
+      <article className="max-w-3xl px-4 py-8 mx-auto cl-post-body">
         <div className="mb-8">
           <h1 className="mb-1 text-3xl leading-tight md:text-4xl lg:text-5xl first-letter:capitalize">{post.title}</h1>
           <div className="post-meta">

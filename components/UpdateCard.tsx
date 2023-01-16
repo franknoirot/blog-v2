@@ -10,11 +10,11 @@ export default function UpdateCard(update: NowUpdate) {
         <time dateTime={updateDate}>
           {updateDate}
         </time>
+        : {update.title}
       </h2>
-      <small>
-        {update.title}
-      </small>
-      <ReactMarkdown>{ update.body.raw }</ReactMarkdown>
+      <article className="cl-post-body">
+        <ReactMarkdown>{ update.body.raw }</ReactMarkdown>
+      </article>
     </div>
   )
 }

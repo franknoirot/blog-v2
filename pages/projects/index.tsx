@@ -36,6 +36,9 @@ const ProjectLanding: NextPageWithLayout = (props) => {
           keys: ['title', 'author']
         }}
       />
+      <p className="max-w-4xl mb-12 md:text-lg">
+        I love building things on the web. Below you&apos;ll find some of the larger projects that I&apos;m proudest of or have the most interesting ideas within them. What isn&apos;t in the list below that I want to work on are: collaborative editing, local-first private apps, and geospatial apps. If you want to build anything on those topics <a href="mailto:frank@franknoirot.co" className='blue-link'>email me.</a>
+      </p>
       <section className="projects-section">
         {processedProjects.map((project, idx) => (
           <ProjectCard key={idx} {...project} />

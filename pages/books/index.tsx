@@ -8,6 +8,7 @@ import BookCard from 'components/BookCard'
 import ListingPageHeading from 'components/ListingPageHeading'
 import { useMemo, useState } from 'react'
 import Seo from 'components/Seo'
+import Link from 'next/link'
 
 export async function getStaticProps() {
   const books = allBooks.sort((a, b) => a.title < b.title ? -1 : 1)
@@ -57,6 +58,9 @@ const BookLanding: NextPageWithLayout = (props) => {
           includeMatches: true,
         }}
       />
+      <p className="max-w-4xl mb-12 md:text-lg">
+        These are books from my personal library that I want to share thoughts on, especially if they spur thoughts <Link href="/posts"><a className='blue-link'>in my writing</a></Link>. Unless otherwise specified, I will likely let you borrow my copy of any of these books if you reach out. I&apos;ll ship it to you as long as you promise to take notes in the margins and sign it when you&apos;re done.
+      </p>
       <section className='book-section'>
         {processedBooks.map((book, idx) => (
           <BookCard key={idx} {...book} />
