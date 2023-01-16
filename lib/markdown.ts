@@ -75,9 +75,9 @@ export function obsidianLinksPostProcess(text: string, allDocuments: DocumentTyp
             return foundDoc.url
         })
 
-        const replaceLabelRegex = new RegExp(linkTextIdentifier+"([\\w-\\s]+)"+linkTextIdentifier, 'g')
+        const replaceLabelRegex = new RegExp(linkTextIdentifier+"(.+)"+linkTextIdentifier, 'g')
         text = text.replace(replaceLabelRegex, (_: string, p1: string) => {
-            return allLinkedDocs.find(doc => doc._raw.sourceFileName.includes(p1))?.title || p1
+            return allLinkedDocs.find(doc => doc._raw.sourceFileName.includes(p1))?.title || p1.replaceAll(linkTextIdentifier, '')
         })
     }
 
