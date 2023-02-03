@@ -11,7 +11,14 @@ const nextConfig = {
     }
 
     return config;
-  }
+  },
+  redirects: () => [
+    {
+      source: '/text-highlight-gpt3',
+      destination: '/text-highlight-visualizer',
+      permanent: true,
+    },
+  ],
 }
 
 export default withContentlayer(nextConfig)
