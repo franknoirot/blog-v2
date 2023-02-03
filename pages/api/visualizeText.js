@@ -1,5 +1,4 @@
 import { getRateLimitMiddlewares, applyMiddleware } from "lib/rateLimiting"
-import { NextApiRequest, NextApiResponse } from "next"
 import { Configuration, OpenAIApi } from "openai"
 
 const configuration = new Configuration({
@@ -9,7 +8,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 const middlewares = getRateLimitMiddlewares().map(applyMiddleware)
 
-export default async function handler(request: NextApiRequest, response: NextApiResponse) {
+export default async function handler(request, response) {
     try {
         await Promise.all(
             middlewares.map(middleware => middleware(request, response))
