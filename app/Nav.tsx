@@ -1,10 +1,10 @@
 import { link } from "fs"
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import React from "react"
 import Icon from "components/Icon"
 import styles from './Nav.module.css'
+import { useRouter } from "next/router"
 
 type NavLink = {
     label: string,
@@ -34,8 +34,8 @@ const socialLinks = [
 ]
 
 const Nav: React.FC<INavProps> = ({ navLinks }: { navLinks: NavLink[] }) => {
-    const pathname = usePathname()
-    const getCurrentClasses = (slug: string) => (pathname?.includes(slug))
+    const router = useRouter()
+    const getCurrentClasses = (slug: string) => (router?.asPath?.includes(slug))
         ? 'text-amber-800 bg-amber-100'
         : ''
 
