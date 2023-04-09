@@ -49,3 +49,6 @@ yarn-error.log*
 
 # env variables
 .env*
+
+# RSS
+/public/feed.xml
