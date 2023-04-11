@@ -35,7 +35,7 @@ const socialLinks = [
 
 const Nav: React.FC<INavProps> = ({ navLinks }: { navLinks: NavLink[] }) => {
     const router = useRouter()
-    const getCurrentClasses = (slug: string) => (router?.asPath?.includes(slug))
+    const getCurrentClasses = (slug: string) => (router?.asPath ?.includes(slug))
         ? 'text-amber-800 bg-amber-100'
         : ''
 
@@ -58,6 +58,7 @@ const Nav: React.FC<INavProps> = ({ navLinks }: { navLinks: NavLink[] }) => {
                 ))}
             </ul>
             <ul className="items-center hidden col-start-2 row-span-2 gap-4 px-2 md:flex">
+                <span className="visually-hidden">Social Links</span>
                 { socialLinks.map(page => (
                     <li key={page.href}>
                         <Link

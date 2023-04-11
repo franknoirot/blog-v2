@@ -21,7 +21,7 @@ const feed = new Feed({
     author,
 })
 
-allPosts.sort((a,b) => compareDesc(new Date(a.date), new Date(b.date)))
+allPosts.sort((a,b) => compareDesc(new Date(a.updated), new Date(b.updated)))
     .forEach(post => {
         const url = `https://franknoirot.co/posts/${post._raw.flattenedPath}`
 
@@ -30,7 +30,7 @@ allPosts.sort((a,b) => compareDesc(new Date(a.date), new Date(b.date)))
             link: url,
             title: post.title,
             description: post.description,
-            date: parseISO(post.date),
+            date: parseISO(post.updated),
             category: post.category,
             author,
         })
