@@ -1,5 +1,5 @@
 // Source: https://dev.to/sdorra/rss-feed-with-nextjs-5dj8
-import { allPosts } from '../.contentlayer/generated/index.mjs'
+import { allDocuments } from '../.contentlayer/generated/index.mjs'
 import { Feed } from 'feed'
 import { compareDesc, parseISO } from 'date-fns'
 import { writeFileSync } from 'fs'
@@ -21,17 +21,35 @@ const feed = new Feed({
     author,
 })
 
-allPosts.sort((a,b) => compareDesc(new Date(a.updated), new Date(b.updated)))
-    .forEach(post => {
-        const url = `https://franknoirot.co/posts/${post._raw.flattenedPath}`
+function getDate(doc) {
+    switch (doc.type) {
+        case 'NowUpdate':
+            return parseISO(doc._raw.flattenedPath.replace('now/', ''))
+        default:
+            return parseISO(doc.updated)
+    }
+}
+
+const categories = [
+    'Software',
+    'Design',
+    'Cities',
+    'Culture',
+    'Books',
+]
+
+categories.forEach(category => feed.addCategory(category))
+
+allDocuments.filter(doc => doc.type !== 'Page').sort((a,b) => compareDesc(new Date(getDate(a)), new Date(getDate(b))))
+    .forEach(doc => {
+        const url = `https://franknoirot.co/${doc._raw.flattenedPath}`
 
         feed.addItem({
             id: url,
             link: url,
-            title: post.title,
-            description: post.description,
-            date: parseISO(post.updated),
-            category: post.category,
+            title: doc.type +' – '+ doc.title,
+            description: doc.description,
+            date: getDate(doc),
             author,
         })
     })
