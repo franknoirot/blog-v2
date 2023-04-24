@@ -29,9 +29,9 @@ export default function ListingPageHeading({ entryType, entries, searchConfig, u
     return (<section className={styles.section + ' group'}>
         <h1 className="text-4xl md:text-6xl">
         All <strong>{ entryType }</strong>
-        <small className="align-middle badge group-focus-within:bg-amber-200">{ resultsCount }</small>
+        <small className="align-middle badge group-focus-within:bg-amber-200 dark:group-focus-within:bg-emerald-600">{ resultsCount }</small>
       </h1>
-      <div className={styles.searchWrapper + ' group-focus-within:bg-amber-200'}>
+      <div className={styles.searchWrapper + ' group-focus-within:bg-amber-200 dark:group-focus-within:bg-emerald-600'}>
         <span>🔍</span>
         <input
             type="text"

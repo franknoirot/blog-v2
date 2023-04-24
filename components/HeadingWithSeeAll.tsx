@@ -11,7 +11,7 @@ export default function HeadingWithSeeAll({ children, totalEntries, href }: IHea
             <a className="group">
                 <h2 className="align-baseline section-heading">
                     { children }
-                    <small className="align-middle badge group-hover:bg-amber-200">
+                    <small className="align-middle badge group-hover:bg-amber-200 dark:group-hover:bg-emerald-800">
                         { totalEntries }
                     </small>
                     <span className="inline-block text-sm font-normal align-middle cta-arrow">

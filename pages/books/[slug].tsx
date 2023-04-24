@@ -108,10 +108,10 @@ const BookTemplate: NextPageWithLayout = (props) => {
             <h1 className="mb-1 text-2xl md:text-4xl">
               {book.title}
               {book.subtitle && (
-                <span className="block text:lg md:text-2xl text-stone-600">{book.subtitle}</span>
+                <span className="block text:lg md:text-2xl text-stone-600 dark:text-stone-400">{book.subtitle}</span>
               )}
             </h1>
-            <div className="grid grid-cols-2 mt-6 text-sm md:grid-cols-3 md:mb-6 gap-x-2 gap-y-3 book-meta text-slate-600">
+            <div className="grid grid-cols-2 mt-6 text-sm md:grid-cols-3 md:mb-6 gap-x-2 gap-y-3 book-meta text-slate-600 dark:text-stone-500">
             <p>{(!book.author && book.editor) ? "edited " : ''}by {book.author || book.editor || "unknown" }</p>
             { (book.publishDate || book.firstPublished) && <p>
                 published in&nbsp;

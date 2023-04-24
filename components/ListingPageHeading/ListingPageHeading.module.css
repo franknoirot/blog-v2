@@ -4,9 +4,9 @@
 
 .searchWrapper {
     @apply flex items-center gap-2;
-    @apply my-4 pl-4 transition-colors rounded-full bg-amber-100;
+    @apply my-4 pl-4 transition-colors rounded-full bg-amber-100 dark:bg-emerald-800;
 }
 
 .search {
-    @apply block w-full px-4 py-1 border rounded-full border-amber-600;
+    @apply block w-full px-4 py-1 border rounded-full border-amber-600 dark:border-emerald-600 dark:bg-neutral-700;
 }

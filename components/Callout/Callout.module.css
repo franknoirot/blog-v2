@@ -1,18 +1,23 @@
 .callout {
     @apply p-3 md:pl-6 my-6 border border-l-2 rounded;
+    @apply text-stone-300;
 }
 
 .callout.info {
     @apply bg-sky-50 border-l-sky-500;
+    @apply dark:bg-sky-900;
 }
 .callout.warning {
     @apply bg-amber-50 border-l-amber-500;
+    @apply dark:bg-amber-900;
 }
 .callout.success {
     @apply bg-lime-50 border-l-lime-500;
+    @apply dark:bg-lime-900;
 }
 .callout.error {
     @apply bg-red-50 border-l-red-500;
+    @apply dark:bg-red-900;
 }
 
 .heading {
@@ -20,14 +25,14 @@
 }
 
 .info .heading {
-    @apply text-sky-700;
+    @apply text-sky-700 dark:text-sky-500;
 }
 .warning .heading {
-    @apply text-amber-700;
+    @apply text-amber-700 dark:text-amber-500;
 }
 .success .heading {
-    @apply text-lime-700;
+    @apply text-lime-700 dark:text-lime-500;
 }
 .error .heading {
-    @apply text-red-700;
+    @apply text-red-700 dark:text-red-500;
 }

@@ -25,17 +25,33 @@
 }
 
 .meta p {
-    @apply text-sm text-stone-700;
+    @apply text-sm text-stone-700 dark:text-neutral-300;
 }
 
 .meta em,
 .meta strong {
     @apply not-italic;
-    color: var(--color-700);
+    color: var(--color-600);
 }
 
 @media (max-width: 768px) {
     .cardWrapper {
         background: var(--color-300);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .cardWrapper {
+        background-color: hsl(calc(var(--h) - 15deg) calc(var(--s) + 60%) calc(var(--l) - 65%) / .3);
+        border-color: var(--color-base);
+    }
+
+    .cardWrapper:hover {
+        background-color: var(--color-800);
+        box-shadow: -2px 2px 0px var(--color-600);
+    }
+
+    .cardWrapper:hover .heading {
+        color: var(--color-600);
     }
 }

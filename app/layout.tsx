@@ -30,7 +30,6 @@ function RootLayout({ Component, pageProps }: AppPropsWithLayout) {
                 <link rel="alternate" type="application/rss+xml" title="franknoirot.co RSS Feed" href="/rss.xml" />
             </head>
             <body>
-                <Nav navLinks={navLinks} />
                 <main className="mx-2 mt-10 pb-36 md:mt-0 md:mx-4">
                     <Component {...pageProps} />
                 </main>

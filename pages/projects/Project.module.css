@@ -22,7 +22,7 @@
 
 
 .meta {
-  @apply pl-4 border-l text-slate-600 grid lg:grid-cols-2 gap-y-4 gap-x-2 my-4 md:my-6;
+  @apply pl-4 border-l text-slate-600 dark:text-slate-400 grid lg:grid-cols-2 gap-y-4 gap-x-2 my-4 md:my-6;
 }
 
 .meta p {
@@ -39,4 +39,27 @@
     @apply border-2 rounded-xl overflow-hidden row-span-2 max-w-sm;
     border-color: var(--color-base);
     box-shadow: -2px 2px 0px var(--color-base);
+}
+
+@media (prefers-color-scheme: dark) {
+    .heading {
+        color: var(--color-base);
+    }
+
+    .topArea {
+        background: none;
+    }
+
+    .meta {
+        border-left-color: var(--color-600);
+    }
+
+    .meta em, .meta strong {
+        color: var(--color-600);
+    }
+
+    .bodyWrapper a[href],
+    .backlinks a[href] {
+        color: var(--color-600);
+    }
 }

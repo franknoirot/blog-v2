@@ -78,7 +78,7 @@ const ProjectTemplate: NextPageWithLayout = (props) => {
         </div>
         {backlinks.length > 0 && (<>
           <h2>Other content that links to this</h2>
-          <ul>
+          <ul className={styles.backlinks}>
             {backlinks.map(backlink => (
               <li key={backlink.url}>
                 <Link href={backlink.url}><a>

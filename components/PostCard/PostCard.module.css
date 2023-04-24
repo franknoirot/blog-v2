@@ -1,5 +1,8 @@
 .cardWrapper {
-    @apply p-2 transition-colors border rounded md:border-transparent hover:bg-green-50 md:bg-transparent hover:border-green-600;
+    @apply p-2 transition-colors border rounded;
+    @apply md:border-transparent md:bg-transparent;
+    @apply hover:bg-green-50 hover:border-green-600;
+    @apply dark:hover:bg-green-800 dark:hover:border-green-600;
 }
 
 .heading {
@@ -7,5 +10,5 @@
 }
 
 .growthStage {
-    @apply inline-block text-xs mr-2 text-green-800 capitalize;
+    @apply inline-block text-xs mr-2 text-green-800 dark:text-green-500 capitalize;
 }
