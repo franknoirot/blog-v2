@@ -43,7 +43,7 @@ export default function Citation(props: React.PropsWithoutRef<ICitation>) {
         {edition ? ` ${edition}. `: ''}
         {publishLocation ? `${publishLocation}: ` : ''}
         {publisher ? `${publisher}, ` : ''}
-        {firstPublished || publishDate}. {pageRange ? pageRange+'. ' : ''}
+        {publishDate || firstPublished || 'Date unknown'}. {pageRange ? pageRange+'. ' : ''}
         {format}.
     </p>)
 }
