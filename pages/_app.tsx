@@ -3,7 +3,6 @@ import type { AppProps } from 'next/app'
 import { NextPageWithLayout } from 'lib/utilityTypes'
 import { ReactNode } from 'react'
 import Head from 'next/head'
-import RightClickVisualizer from 'components/RightClickVisualizer'
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
@@ -24,7 +23,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <meta name="theme-color" content="#ffffff"/>
     </Head>
     <Component {...pageProps} />
-    <RightClickVisualizer />
+    {/* <RightClickVisualizer /> */}
   </>)
 }
 

@@ -1,6 +1,5 @@
 .callout {
     @apply p-3 md:pl-6 my-6 border border-l-2 rounded;
-    @apply text-stone-300;
 }
 
 .callout.info {
