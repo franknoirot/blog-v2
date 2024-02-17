@@ -71,6 +71,9 @@ const PostTemplate: NextPageWithLayout = (props) => {
           <h1 className="mb-1 text-3xl leading-tight md:text-4xl lg:text-5xl first-letter:capitalize">{post.title}</h1>
           <div className="post-meta">
             <p>
+              <em>{post.description}</em>
+            </p>
+            <p>
               Growth Stage: <span className={"text-green-700 capitalize " + post.growthStage}>{ post.growthStage }</span>
             </p>
             <p>
@@ -79,6 +82,7 @@ const PostTemplate: NextPageWithLayout = (props) => {
             <p>
               Last tended <time dateTime={post.updated}>{format(adjustDate(post.updated), 'LLLL d, yyyy')}</time>
             </p>
+            <p>Filed under <span className="text-green-700 capitalize">{ post.category }</span></p>
           </div>
         </div>
         <MdxBody content={ post.body.code }/>
