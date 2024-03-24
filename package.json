@@ -9,7 +9,8 @@
     "postbuild": "npm run rss",
     "start": "next start",
     "lint": "next lint",
-    "rss": "node scripts/rss.mjs"
+    "rss": "node scripts/rss.mjs",
+    "tsc": "tsc"
   },
   "dependencies": {
     "@types/color": "^3.0.3",

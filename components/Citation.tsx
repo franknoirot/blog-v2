@@ -7,7 +7,7 @@ interface ICitation {
     publishLocation?: string, // City of publication (cite only the first city if there is more than one)
     firstPublished?: number, // Date of publication
     publishDate: number,
-    edition?: number, // Volume and issue numbers, if available (for journals)
+    edition?: string, // Volume and issue numbers, if available (for journals)
     format: string, // Medium of publication or reception (print, web, radio, television, LP, CD, etc.)
     
     pageRange?: string, // Page numbers you have referenced
