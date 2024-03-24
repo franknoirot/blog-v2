@@ -103,7 +103,7 @@ export const Book = defineDocumentType(() => ({
             required: true,
         },
         edition: {
-            type: 'number',
+            type: 'string',
             description: 'Edition name of owned published copy',
             required: false,
         },
@@ -188,9 +188,14 @@ export const Book = defineDocumentType(() => ({
           required: false,
         },
         status: {
-          type: 'boolean',
+          type: 'enum',
+          options: [
+            'Read',
+            'Unread',
+            'Reading',
+          ],
+          default: 'Unread',
           description: 'Has the book been read',
-          default: false,
         },
         created: {
           type: 'date',
