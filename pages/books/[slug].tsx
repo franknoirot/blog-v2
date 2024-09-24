@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { allBooks, allDocuments, Book } from 'contentlayer/generated'
 import { GetStaticProps } from 'next'
 import { getBacklinks, obsidianLinksPostProcess } from 'lib/markdown'
@@ -15,6 +14,7 @@ import Citation from 'components/Citation'
 import Link from 'next/link'
 import MdxBody from 'components/MdxBody'
 import styles from './BookTemplate.module.css'
+import { Comments } from 'components/Comments'
 
 export async function getStaticPaths() {
   const paths = allBooks.map((book) => book.url)
@@ -147,6 +147,7 @@ const BookTemplate: NextPageWithLayout = (props) => {
               </li>
             ))}
           </ul></>)}
+          <Comments />
         </div>
       </article>
     </>
