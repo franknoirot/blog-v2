@@ -14,6 +14,7 @@ import Seo from 'components/Seo'
 import { GROWTH_STAGE_ICONS } from 'lib/consts'
 import Link from 'next/link'
 import { adjustDate } from 'lib/time'
+import { Comments } from 'components/Comments'
 
 
 
@@ -97,6 +98,7 @@ const PostTemplate: NextPageWithLayout = (props) => {
             </li>
           ))}
         </ul></>)}
+        <Comments />
       </article>
     </>
   )

@@ -12,6 +12,7 @@ import styles from './Project.module.css'
 import Head from 'next/head'
 import Link from 'next/link'
 import { adjustDate } from 'lib/time'
+import { Comments } from 'components/Comments'
 
 export async function getStaticPaths() {
   const paths = allProjects.map((project) => project.url)
@@ -87,6 +88,7 @@ const ProjectTemplate: NextPageWithLayout = (props) => {
               </li>
             ))}
           </ul></>)}
+        <Comments />
       </article>
     </>
   )
